@@ -1,127 +1,225 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import React from "react";
+import { Link, graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import Layout from "../components/Layout";
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
+const IndexPage = ({ data }) => {
 
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-  },
-  {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Netlify. Get started for free!",
-  },
-]
+  const pageData = data?.allWpPage?.edges?.[0]?.node?.homePage;
 
-const samplePageLinks = [
-  {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
-    description:
-      "A simple example of linking to another page within a Gatsby site",
-  },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
-]
+  const {
+    homePageTitle,
+    homeHeroPara,
+    brainImage,
+    aboutTitle,
+    aboutPara,
+    aboutDoctorImage,
+    subTitle,
+    clinicalFocusList,
+    patientsChooseTitle,
+    patientsChoosePara,
+    patientsChooseList,
+  } = pageData || {};
 
-const moreLinks = [
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
+  const brainImgUrl = brainImage?.node?.mediaItemUrl;
+  const brainImgAlt = brainImage?.node?.altText || "Brain image";
 
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
+  const doctorImgUrl = aboutDoctorImage?.node?.mediaItemUrl;
+  const doctorImgAlt = aboutDoctorImage?.node?.altText || "Dr Pavan Pai";
 
-const IndexPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
-        ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
-    </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
-  </Layout>
-)
+  return (
+    <Layout>
+      {/* ── Hero Section ── */}
+      <section className="hero-section">
+        <div className="container">
+          <div className="left">
+            <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
+            <p dangerouslySetInnerHTML={{ __html: homeHeroPara }} />
+            <div className="btn-wrap">
+              <Link to="/contact" className="btn">Book an Appointment</Link>
+            </div>
+          </div>
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
-export const Head = () => <Seo title="Home" />
+          <div className="right">
+            <div className="brain-wrapper">
+              {brainImgUrl && (
+                <img src={brainImgUrl} alt={brainImgAlt} />
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
 
-export default IndexPage
+      {/* ── About Section ── */}
+      <section className="about-section">
+        <div className="container">
+          <div className="left">
+            <div className="img">
+              {doctorImgUrl && (
+                <img src={doctorImgUrl} alt={doctorImgAlt} />
+              )}
+            </div>
+          </div>
+          <div className="right">
+
+            <span
+              className="about-para"
+              dangerouslySetInnerHTML={{ __html: aboutTitle }}
+            />
+            <p
+              className="about-para"
+              dangerouslySetInnerHTML={{ __html: aboutPara }}
+            />
+            <div className="btn-wrap">
+              <Link to="/about" className="btn">Know More</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ── Clinical Focus + Patients Choose ── */}
+      <section className="Clinical-Focus-wrapper">
+        <div className="bg-img">
+          <img src="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/bg-face.svg" alt="face bg" />
+        </div>
+
+        {/* Clinical Focus */}
+        <div className="Clinical-Focus">
+          <div className="container">
+            <div className="left">
+              <h2>Clinical Focus</h2>
+              <span
+                className="about-para"
+                dangerouslySetInnerHTML={{ __html: subTitle }}
+              />
+              <ul>
+                {clinicalFocusList?.map((item, index) => (
+                  <li key={index}>
+                    <div className="img-wrap">
+                      <img
+                        src={item?.listImage?.node?.mediaItemUrl}
+                        alt={item?.listImage?.node?.altText || item?.nameList}
+                      />
+                    </div>
+
+                    <span
+                      className="about-para"
+                      dangerouslySetInnerHTML={{ __html: item?.nameList }}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <div className="btn-wrap">
+                <Link to="/specialties" className="btn">Read More</Link>
+              </div>
+            </div>
+            <div className="right"></div>
+          </div>
+        </div>
+
+        {/* Patients Choose */}
+        <div className="Patients-Choose">
+          <div className="container">
+            <div className="left">
+              <span
+                className="about-para"
+                dangerouslySetInnerHTML={{ __html: patientsChooseTitle }}
+              />
+
+              <span
+                className="about-para"
+                dangerouslySetInnerHTML={{ __html: patientsChoosePara }}
+              />
+              <ul>
+                {patientsChooseList?.map((item, index) => (
+                  <li key={index}>
+                    <div className="img-wrap">
+                      <img
+                        src={item?.patientsImage?.node?.mediaItemUrl}
+                        alt={item?.patientsImage?.node?.altText || item?.patientsList}
+                      />
+                    </div>
+                    <span
+                      className="about-para"
+                      dangerouslySetInnerHTML={{ __html: item?.patientsList }}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <div className="btn-wrap">
+                <Link to="/about" className="btn">Read More</Link>
+              </div>
+            </div>
+            <div className="right"></div>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export const query = graphql`
+query MyQuery {
+  allWpPage (filter: {databaseId: {eq: 8}}){
+    edges {
+      node {
+        homePage {
+          homeHeroPara
+          homePageTitle
+          brainImage {
+            node {
+              altText
+              link
+              mediaItemUrl
+              gatsbyImage(width: 10, height: 10, placeholder: BLURRED, layout: CONSTRAINED)
+            }
+          }
+          aboutTitle
+          aboutPara
+          aboutDoctorImage {
+            node {
+              altText
+              link
+              mediaItemUrl
+              gatsbyImage(width: 10, height: 10, placeholder: BLURRED, layout: CONSTRAINED)
+            }
+          }
+          subTitle
+          clinicalFocusList {
+            nameList
+            listImage {
+              node {
+                altText
+                mediaItemUrl
+                mediaItemId
+                slug
+                uri
+                title
+              }
+            }
+          }
+          patientsChooseTitle
+          patientsChoosePara
+          patientsChooseList{
+            patientsList
+            patientsImage{
+               node {
+                altText
+                mediaItemUrl
+                mediaItemId
+                slug
+                uri
+                title
+              }
+            }
+            
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+export default IndexPage;
