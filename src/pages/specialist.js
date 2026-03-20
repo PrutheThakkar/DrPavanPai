@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { graphql } from "gatsby";
 import InsideBanner from "../components/Inside-Banner";
-// import Layout from "../components/Layout";
+import Layout from "../components/Layout";
 
 const DESKTOP_COLS = 3;
 const MOBILE_COLS = 2;
@@ -110,92 +110,92 @@ const SpecialistPage = ({ data }) => {
   const activeTabData = tabs.find((t) => t.id === activeId);
 
   return (
-    // <Layout>
-    <>
-      {/* ── Inside Banner ── */}
-      <InsideBanner
-        desktopImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
-        mobileImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
-        alt="Specialties page banner"
-        width={1440}
-        height={500}
-      />
+    <Layout>
+      <>
+        {/* ── Inside Banner ── */}
+        <InsideBanner
+          desktopImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
+          mobileImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
+          alt="Specialties page banner"
+          width={1440}
+          height={500}
+        />
 
-      {/* ── Specialties Tabs Section ── */}
-      <section className="specialties-section" id="Areas-of-Clinical-focus">
-        <div className="container">
-          <h2>Expertise & Specialties</h2>
-          <p>Clear insights into neurological conditions and advanced treatment options</p>
-          <div className="tab-section">
+        {/* ── Specialties Tabs Section ── */}
+        <section className="specialties-section" id="Areas-of-Clinical-focus">
+          <div className="container">
+            <h2>Expertise & Specialties</h2>
+            <p>Clear insights into neurological conditions and advanced treatment options</p>
+            <div className="tab-section">
 
-            {/* Tab Bar */}
-            <nav className="sp-tab-bar" role="tablist" aria-label="Specialty categories">
-              {tabs.map((tab) => (
-                <h3
-                  key={tab.id}
-                  role="tab"
-                  className={`sp-tab-btn${activeId === tab.id ? " active" : ""}`}
-                  aria-selected={activeId === tab.id}
-                  onClick={() => handleTabClick(tab.id)}
-                >
-                  {tab.label}
-                </h3>
-              ))}
-            </nav>
+              {/* Tab Bar */}
+              <nav className="sp-tab-bar" role="tablist" aria-label="Specialty categories">
+                {tabs.map((tab) => (
+                  <h3
+                    key={tab.id}
+                    role="tab"
+                    className={`sp-tab-btn${activeId === tab.id ? " active" : ""}`}
+                    aria-selected={activeId === tab.id}
+                    onClick={() => handleTabClick(tab.id)}
+                  >
+                    {tab.label}
+                  </h3>
+                ))}
+              </nav>
 
-            {/* Active Panel */}
-            <div
-              key={activeId}
-              className="sp-tab-panel active"
-              id={`sp-tab-${activeId}`}
-              role="tabpanel"
-            >
-              {activeTabData?.cards.map((card, idx) => {
-                const isActive =
-                  activeCard?.tabId === activeId && activeCard?.idx === idx;
+              {/* Active Panel */}
+              <div
+                key={activeId}
+                className="sp-tab-panel active"
+                id={`sp-tab-${activeId}`}
+                role="tabpanel"
+              >
+                {activeTabData?.cards.map((card, idx) => {
+                  const isActive =
+                    activeCard?.tabId === activeId && activeCard?.idx === idx;
 
-                // which index to inject detail panel after
-                const lastIdx = (activeTabData?.cards.length ?? 0) - 1;
-                const rowEnd = activeCard
-                  ? Math.ceil((activeCard.idx + 1) / cols) * cols - 1
-                  : null;
-                const injectAfter = activeCard
-                  ? Math.min(rowEnd, lastIdx)
-                  : null;
+                  // which index to inject detail panel after
+                  const lastIdx = (activeTabData?.cards.length ?? 0) - 1;
+                  const rowEnd = activeCard
+                    ? Math.ceil((activeCard.idx + 1) / cols) * cols - 1
+                    : null;
+                  const injectAfter = activeCard
+                    ? Math.min(rowEnd, lastIdx)
+                    : null;
 
-                return (
-                  <React.Fragment key={card.categoryTitle || idx}>
-                    <SpecCard
-                      img={card.categoryImage?.node?.mediaItemUrl}
-                      alt={card.categoryImage?.node?.altText || card.categoryTitle}
-                      label={card.categoryTitle}
-                      index={idx}
-                      isActive={isActive}
-                      onClick={() => handleCardClick(activeId, idx)}
-                    />
+                  return (
+                    <React.Fragment key={card.categoryTitle || idx}>
+                      <SpecCard
+                        img={card.categoryImage?.node?.mediaItemUrl}
+                        alt={card.categoryImage?.node?.altText || card.categoryTitle}
+                        label={card.categoryTitle}
+                        index={idx}
+                        isActive={isActive}
+                        onClick={() => handleCardClick(activeId, idx)}
+                      />
 
-                    {/* Inject detail panel after the correct row */}
-                    {activeCard?.tabId === activeId &&
-                      idx === injectAfter && (
-                        <DetailPanel
-                          card={activeTabData.cards[activeCard.idx]}
-                          onClose={handleClose}
-                          panelRef={panelRef}
-                        />
-                      )}
-                  </React.Fragment>
-                );
-              })}
+                      {/* Inject detail panel after the correct row */}
+                      {activeCard?.tabId === activeId &&
+                        idx === injectAfter && (
+                          <DetailPanel
+                            card={activeTabData.cards[activeCard.idx]}
+                            onClose={handleClose}
+                            panelRef={panelRef}
+                          />
+                        )}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
             </div>
+
           </div>
+        </section>
 
-        </div>
-      </section>
+        {/* ── Styles ── */}
 
-      {/* ── Styles ── */}
-
-</>
-    // </Layout>
+      </>
+    </Layout>
   );
 };
 

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { graphql } from "gatsby";
 import InsideBanner from "../components/Inside-Banner";
-// import Layout from "../components/Layout";
+import Layout from "../components/Layout";
 
 // ── Single FAQ Item ──
 const FaqItem = ({ question, answer, isOpen, onClick }) => (
@@ -42,49 +42,49 @@ const FaqPage = ({ data }) => {
   };
 
   return (
-    // <Layout>
-    <>
-    
-      {/* ── Inside Banner ── */}
-      <InsideBanner
-        desktopImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
-        mobileImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
-        alt="FAQ page banner"
-        width={1440}
-        height={500}
-      />
+    <Layout>
+      <>
 
-      {/* ── FAQ Section ── */}
-      <section className="faq-section">
-        <div className="container">
+        {/* ── Inside Banner ── */}
+        <InsideBanner
+          desktopImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
+          mobileImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
+          alt="FAQ page banner"
+          width={1440}
+          height={500}
+        />
 
-          <div className="faq-header">
-            <h2 className="faq-heading">Frequently Asked Questions</h2>
-            <p className="faq-subheading">
-              Find answers to common questions about neurology care and treatments.
-            </p>
+        {/* ── FAQ Section ── */}
+        <section className="faq-section">
+          <div className="container">
+
+            <div className="faq-header">
+              <h2 className="faq-heading">Frequently Asked Questions</h2>
+              <p className="faq-subheading">
+                Find answers to common questions about neurology care and treatments.
+              </p>
+            </div>
+
+            {faqs.length > 0 ? (
+              <ul className="faq-list">
+                {faqs.map((faq, idx) => (
+                  <FaqItem
+                    key={faq.question || idx}
+                    question={faq.question}
+                    answer={faq.answer}
+                    isOpen={openIndex === idx}
+                    onClick={() => handleToggle(idx)}
+                  />
+                ))}
+              </ul>
+            ) : (
+              <p className="faq-empty">No FAQs found.</p>
+            )}
+
           </div>
-
-          {faqs.length > 0 ? (
-            <ul className="faq-list">
-              {faqs.map((faq, idx) => (
-                <FaqItem
-                  key={faq.question || idx}
-                  question={faq.question}
-                  answer={faq.answer}
-                  isOpen={openIndex === idx}
-                  onClick={() => handleToggle(idx)}
-                />
-              ))}
-            </ul>
-          ) : (
-            <p className="faq-empty">No FAQs found.</p>
-          )}
-
-        </div>
-      </section>
+        </section>
       </>
-    // </Layout>
+    </Layout>
   );
 };
 
