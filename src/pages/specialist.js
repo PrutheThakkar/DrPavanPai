@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { graphql } from "gatsby";
 import InsideBanner from "../components/Inside-Banner";
-import Layout from "../components/Layout";
+// import Layout from "../components/Layout";
 
 const DESKTOP_COLS = 3;
 const MOBILE_COLS = 2;

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { graphql } from "gatsby";
 import InsideBanner from "../components/Inside-Banner";
-import Layout from "../components/Layout";
+// import Layout from "../components/Layout";
 
 // ── Single FAQ Item ──
 const FaqItem = ({ question, answer, isOpen, onClick }) => (
