@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { graphql } from "gatsby";
 import InsideBanner from "../components/Inside-Banner";
-import Layout from "../components/Layout";
+// import Layout from "../components/Layout";
 
 const DESKTOP_COLS = 3;
 const MOBILE_COLS = 2;
@@ -110,7 +110,7 @@ const SpecialistPage = ({ data }) => {
   const activeTabData = tabs.find((t) => t.id === activeId);
 
   return (
-    <Layout>
+    // <Layout>
       <>
         {/* ── Inside Banner ── */}
         <InsideBanner
@@ -195,7 +195,7 @@ const SpecialistPage = ({ data }) => {
         {/* ── Styles ── */}
 
       </>
-    </Layout>
+    // </Layout>
   );
 };
 
