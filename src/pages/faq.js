@@ -42,7 +42,9 @@ const FaqPage = ({ data }) => {
   };
 
   return (
-    <Layout>
+    // <Layout>
+    <>
+    
       {/* ── Inside Banner ── */}
       <InsideBanner
         desktopImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
@@ -81,7 +83,8 @@ const FaqPage = ({ data }) => {
 
         </div>
       </section>
-    </Layout>
+      </>
+    // </Layout>
   );
 };
 

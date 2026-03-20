@@ -28,7 +28,8 @@ const IndexPage = ({ data }) => {
   const doctorImgAlt = aboutDoctorImage?.node?.altText || "Dr Pavan Pai";
 
   return (
-    <Layout>
+    // <Layout>
+    <>
       {/* ── Hero Section ── */}
       <section className="hero-section">
         <div className="container">
@@ -155,7 +156,8 @@ const IndexPage = ({ data }) => {
           </div>
         </div>
       </section>
-    </Layout>
+      </>
+    // </Layout>
   );
 };
 
