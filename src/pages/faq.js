@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { graphql } from "gatsby";
 import InsideBanner from "../components/Inside-Banner";
-// import Layout from "../components/Layout";
+import Layout from "../components/Layout-new";
 
 // ── Single FAQ Item ──
 const FaqItem = ({ question, answer, isOpen, onClick }) => (
@@ -42,7 +42,7 @@ const FaqPage = ({ data }) => {
   };
 
   return (
-    // <Layout>
+    <Layout>
       <>
 
         {/* ── Inside Banner ── */}
@@ -84,7 +84,7 @@ const FaqPage = ({ data }) => {
           </div>
         </section>
       </>
-    /* </Layout> */
+     </Layout>
   );
 };
 

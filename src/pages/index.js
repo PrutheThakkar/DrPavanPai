@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-// import Layout from "../components/Layout";
+import Layout from "../components/Layout-new";
 
 const IndexPage = ({ data }) => {
 
@@ -28,7 +28,7 @@ const IndexPage = ({ data }) => {
   const doctorImgAlt = aboutDoctorImage?.node?.altText || "Dr Pavan Pai";
 
   return (
-    // <Layout>
+   <Layout>
       <>
         {/* ── Hero Section ── */}
         <section className="hero-section">
@@ -157,7 +157,7 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
       </>
-    // </Layout>
+  </Layout>
   );
 };
 
