@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "formik": "^2.4.9",
     "gatsby": "^5.14.6",
     "gatsby-plugin-image": "^3.14.0",
     "gatsby-plugin-manifest": "^5.14.0",
@@ -16,7 +17,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.10",
-    "sass": "^1.98.0"
+    "sass": "^1.98.0",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "prettier": "^2.8.8"

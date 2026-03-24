@@ -2,9 +2,9 @@
    FAQ SECTION
 ══════════════════════════════ */
 .faq-section {
-  padding: 48px 0 80px;
+  /* padding: 48px 0 80px; */
   /* background: linear-gradient(135deg, #c4b8de 0%, #a899c8 40%, #b8aed2 100%); */
-  min-height: 60vh;
+  /* min-height: 60vh; */
   position: relative;
 }
 
@@ -12,7 +12,7 @@
 .faq-section .container {
   position: relative;
   z-index: 1;
-  max-width: 860px;
+  /* max-width: 860px; */
 }
 
 /* ── Header ── */
@@ -26,15 +26,8 @@
   display: none; /* hidden — eyebrow label replaces it per the screenshot */
 }
 
-/* ── List reset ── */
-.faq-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+
+
 
 /* ── FAQ item card ── */
 .faq-item {
@@ -138,4 +131,28 @@
   .faq-item--open
   .faq-answer        { padding-bottom: 18px; }
   .faq-list          { gap: 12px; }
+}
+
+.faq-list{
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+margin-top: 30px;
+}
+.faq-list .faq-item {
+width: 30%;
+margin-bottom: 50px;
+}
+
+@media (max-width:1440px) {
+ .faq-list .faq-item {
+width: 48%;
+margin-bottom: 30px;
+}
+}
+@media (max-width:767px) {
+ .faq-list .faq-item {
+width: 100%;
+margin-bottom: 30px;
+}
 }

@@ -1,22 +1,17 @@
 // src/pages/faq.js
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { graphql } from "gatsby";
 import InsideBanner from "../components/Inside-Banner";
 import Layout from "../components/Layout-new";
 
 // ── Single FAQ Item ──
-const FaqItem = ({ question, answer, isOpen, onClick }) => (
-  <li className={`faq-item${isOpen ? " faq-item--open" : ""}`}>
-    <button
-      className="faq-question"
-      onClick={onClick}
-      aria-expanded={isOpen}
-    >
+const FaqItem = ({ question, answer }) => (
+  <li className="faq-item faq-item--open">
+    <div className="faq-question">
       <span>{question}</span>
-      <span className="faq-icon">{isOpen ? "+" : "+"}</span>
-    </button>
-    <div className="faq-answer" aria-hidden={!isOpen}>
+    </div>
+    <div className="faq-answer">
       <p>{answer}</p>
     </div>
   </li>
@@ -24,7 +19,6 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => (
 
 // ── Main Page ──
 const FaqPage = ({ data }) => {
-  const [openIndex, setOpenIndex] = useState(null);
 
   // body class
   useEffect(() => {
@@ -37,14 +31,9 @@ const FaqPage = ({ data }) => {
     node.faqPage?.faqSection || []
   ) || [];
 
-  const handleToggle = (idx) => {
-    setOpenIndex((prev) => (prev === idx ? null : idx));
-  };
-
   return (
     <Layout>
       <>
-
         {/* ── Inside Banner ── */}
         <InsideBanner
           desktopImage="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/inside-banner.jpg"
@@ -60,9 +49,7 @@ const FaqPage = ({ data }) => {
 
             <div className="faq-header">
               <h2 className="faq-heading">Frequently Asked Questions</h2>
-              <p className="faq-subheading">
-                Find answers to common questions about neurology care and treatments.
-              </p>
+              <p>Answers to help you feel informed and confident</p>
             </div>
 
             {faqs.length > 0 ? (
@@ -72,8 +59,6 @@ const FaqPage = ({ data }) => {
                     key={faq.question || idx}
                     question={faq.question}
                     answer={faq.answer}
-                    isOpen={openIndex === idx}
-                    onClick={() => handleToggle(idx)}
                   />
                 ))}
               </ul>
@@ -84,7 +69,7 @@ const FaqPage = ({ data }) => {
           </div>
         </section>
       </>
-     </Layout>
+    </Layout>
   );
 };
 

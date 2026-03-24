@@ -7,7 +7,8 @@ const Header = () => {
 
   const navLinks = [
     { label: "Home", to: "/" },
-    { label: "About", to: "/about" },
+    // { label: "About", to: "/about" },
+    { label: "Specialties ", to: "/specialties" },
     { label: "Blogs", to: "/blogs" },
     { label: "FAQ", to: "/faq" },
   ];
@@ -54,43 +55,7 @@ const Header = () => {
               </li>
             ))}
 
-            {/* Specialties with Mega Menu */}
-            <li
-              className={`menu-item has-mega ${megaOpen ? "active" : ""}`}
-              id="expertise-trigger"
-            >
-              <a
-                href="#"
-                className="nav-link"
-                onClick={toggleMega}
-                aria-expanded={megaOpen}
-                aria-haspopup="true"
-              >
-                Specialties
-                <span className={`mega-arrow ${megaOpen ? "mega-arrow--open" : ""}`}>▾</span>
-              </a>
-
-              {/* Mega Menu Dropdown */}
-              {megaOpen && (
-                <div className="mega-menu" id="Areas-of-Clinical-focus">
-                  <ul className="mega-menu__list">
-                    {specialties.map((item) => (
-                      <li key={item.label} className="mega-menu__item">
-                        <Link
-                          to={item.to}
-                          className="mega-menu__link"
-                          onClick={() => {
-                            closeMega();
-                          }}
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </li>
+          
 
             {/* CTA as nav item */}
             <li className="menu-item contact">
@@ -136,7 +101,7 @@ const Header = () => {
           ))}
 
           {/* Mobile Specialties */}
-          <li>
+          {/* <li>
             <button
               className="mobile-nav-link mobile-mega-toggle"
               onClick={toggleMega}
@@ -162,7 +127,7 @@ const Header = () => {
                 ))}
               </ul>
             )}
-          </li>
+          </li> */}
 
           <li>
             <Link

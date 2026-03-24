@@ -28,6 +28,7 @@
 }
 .hero-section .container .left {
   width: 50%;
+  z-index: 99;
 }
 @media (max-width: 767px) {
   .hero-section .container .left {
@@ -42,6 +43,7 @@
 }
 .hero-section .container .left h1 {
   font-weight: 100;
+  line-height: 1.2em;
 }
 @media (max-width: 767px) {
   .hero-section .container .left p {

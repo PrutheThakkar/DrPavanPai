@@ -7,6 +7,8 @@ import "../css/home.css";
 import "../css/inside.css";
 import "../css/specialities.css";
 import "../css/faq.css";
+import "../css/contact.css";
+import "../css/blog.css";
 
 const Layout = ({ children }) => {
   return (
