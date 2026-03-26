@@ -82,7 +82,7 @@ const IndexPage = ({ data }) => {
         {/* ── Clinical Focus + Patients Choose ── */}
         <section className="Clinical-Focus-wrapper">
           <div className="bg-img">
-            <img src="https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/bg-face.svg" alt="face bg" />
+            <img src="https://app.drpavanpai.com/wp-content/uploads/2026/03/bg-face.svg" alt="face bg" />
           </div>
 
           {/* Clinical Focus */}

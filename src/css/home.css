@@ -111,7 +111,7 @@
   content: "";
   width: 85%;
   height: 100%;
-  background: url(https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/about-right-bg.svg);
+  background: url(https://app.drpavanpai.com/wp-content/uploads/2026/03/about-right-bg.svg);
   position: absolute;
   right: 0;
   top: 0;
@@ -145,7 +145,7 @@
   .about-section .container .left {
     width: 100%;
     height: 400px;
-    background: url(https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/about-right-bg.svg);
+    background: url(https://app.drpavanpai.com/wp-content/uploads/2026/03/about-right-bg.svg);
   }
   .about-section .container .left .img {
     width: auto;
@@ -166,7 +166,7 @@
   content: "";
   width: 100%;
   height: 100%;
-  background: url(https://drpavanpai.studiosentientdemo.com/wp-content/uploads/2026/03/about-dr-bg.png);
+  background: url(https://app.drpavanpai.com/wp-content/uploads/2026/03/about-dr-bg.png);
   background-repeat: no-repeat;
   background-position: left bottom;
   bottom: 0;

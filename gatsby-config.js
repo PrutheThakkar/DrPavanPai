@@ -11,7 +11,7 @@ module.exports = {
     author: `@Pavan Pai`,
     siteUrl:
       process.env.GATSBY_WEBSITE_URL ||
-      "https://drpavanpai.studiosentientdemo.com/",
+      "https://app.drpavanpai.com/",
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -23,7 +23,7 @@ module.exports = {
       options: {
         url:
           process.env.GATSBY_WPGRAPHQL_URL ||
-          "https://drpavanpai.studiosentientdemo.com/graphql",
+          "https://app.drpavanpai.com/graphql",
       },
     },
   ],
