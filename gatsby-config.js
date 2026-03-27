@@ -1,7 +1,3 @@
-
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
 require("dotenv").config()
 
 module.exports = {
@@ -24,10 +20,15 @@ module.exports = {
         url:
           process.env.GATSBY_WPGRAPHQL_URL ||
           "https://app.drpavanpai.com/graphql",
+        develop: {
+          hardCacheMediaFiles: true,   // ← cache images, stop re-fetching
+          hardCacheData: false,
+          nodeUpdateInterval: 300000,  // ← only check for WP changes every 5 mins (default is 5000ms = 5 sec)
+        },
+        production: {
+          hardCacheMediaFiles: false,
+        },
       },
     },
   ],
 }
-
-
-// https://pruthe.app.n8n.cloud/webhook-test/e804e415-42cd-45f4-8d91-6bd2adc1b6ad

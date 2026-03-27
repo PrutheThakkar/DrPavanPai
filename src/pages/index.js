@@ -54,7 +54,7 @@ const IndexPage = ({ data }) => {
         {/* ── About Section ── */}
         <section className="about-section">
           <div className="container">
-            <div className="left">
+            <div className="left"> 
               <div className="img">
                 {doctorImgUrl && (
                   <img src={doctorImgUrl} alt={doctorImgAlt} />
@@ -77,7 +77,6 @@ const IndexPage = ({ data }) => {
             </div>
           </div>
         </section>
-
 
         {/* ── Clinical Focus + Patients Choose ── */}
         <section className="Clinical-Focus-wrapper">

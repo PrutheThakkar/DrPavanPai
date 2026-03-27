@@ -9,6 +9,7 @@ import "../css/specialities.css";
 import "../css/faq.css";
 import "../css/contact.css";
 import "../css/blog.css";
+import "../css/uifixer.css";
 
 const Layout = ({ children }) => {
   return (
