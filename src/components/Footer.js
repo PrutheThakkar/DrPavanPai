@@ -19,7 +19,7 @@ const Footer = () => {
             <div className="footer-logo">
               <Link to="/" className="header-logo">
                 <div className="logo">
-                  <img src="https://app.drpavanpai.com/wp-content/uploads/2026/03/site-logo.svg" alt="Dr. Pavan Pai Logo" />
+                  <img src="https://app.drpavanpai.com/wp-content/uploads/2026/04/logo-updtaed.svg" alt="Dr. Pavan Pai Logo" />
                 </div>
               </Link>
               <div className="address">

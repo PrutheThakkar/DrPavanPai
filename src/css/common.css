@@ -626,12 +626,22 @@ header .wrapper::before {
   position: absolute;
 }
 header .wrapper .logo {
-  width: 292px;
+  width: 478px;
   height: auto;
+}
+@media (max-width: 1920px) {
+  header .wrapper .logo {
+    width: 400px;
+  }
+}
+@media (max-width: 1680px) {
+  header .wrapper .logo {
+    width: 300px;
+  }
 }
 @media (max-width: 1280px) {
   header .wrapper .logo {
-    width: 232px;
+    width: px;
   }
 }
 @media (max-width: 1075px) {

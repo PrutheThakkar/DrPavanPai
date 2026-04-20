@@ -36,7 +36,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="header-logo" onClick={closeMega}>
             <div className="logo">
-              <img src="https://app.drpavanpai.com/wp-content/uploads/2026/03/site-logo.svg" alt="Dr. Pavan Pai Logo" />
+              <img src="https://app.drpavanpai.com/wp-content/uploads/2026/04/logo-updtaed.svg" alt="Dr. Pavan Pai Logo" />
             </div>
           </Link>
 
