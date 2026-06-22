@@ -7,7 +7,7 @@ const Header = () => {
 
   const navLinks = [
     { label: "Home", to: "/" },
-    // { label: "About", to: "/about" },
+    { label: "About", to: "/about" },
     { label: "Specialties ", to: "/specialties" },
     { label: "Blogs", to: "/blogs" },
     { label: "FAQ", to: "/faq" },
@@ -36,7 +36,9 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="header-logo" onClick={closeMega}>
             <div className="logo">
-              <img src="https://app.drpavanpai.com/wp-content/uploads/2026/04/logo-updtaed.svg" alt="Dr. Pavan Pai Logo" />
+              <img className="purple-logo" src="https://app.drpavanpai.com/wp-content/uploads/2026/04/logo-updtaed.svg" alt="Dr. Pavan Pai Logo" />
+              <img className="white-logo" src="https://app.drpavanpai.com/wp-content/uploads/2026/06/white-new-logo.svg " alt="Dr. Pavan Pai Logo" />
+
             </div>
           </Link>
 
@@ -132,7 +134,7 @@ const Header = () => {
           <li>
             <Link
               to="/contact"
-              className="mobile-cta"
+              className="btn mobile-btn"
               onClick={() => setMenuOpen(false)}
             >
               Reach out

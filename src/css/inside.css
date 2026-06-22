@@ -1,10 +1,24 @@
 .inside-page header {
-  position: relative;
+  /* position: relative; */
+ 
 }
+.inside-page header .container {
+  background: #6E28CA;
+}
+.inside-page header .container a{
+ color: #fff;
+}
+
+
 .inside-page .inside-banner {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   overflow: hidden;
-  height: 500px;
+  height: 600px;
+}
+@media (max-width:1000px) {
+    .inside-page .inside-banner {
+      height: 350px;
+    }
 }
 @media (max-width:767px) {
     .inside-page .inside-banner {
@@ -27,4 +41,21 @@
         object-fit: cover;
         object-position: center center;
     }
+}
+
+.inside-page .inside-banner .container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.inside-banner img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  
+}
+
+.inside-banner h1{
+  color: #fff;
 }

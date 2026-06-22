@@ -8,6 +8,20 @@
   position: relative;
 }
 
+.faq-section::before{
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: url(../images/question-mark.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
 
 .faq-section .container {
   position: relative;
@@ -54,11 +68,13 @@
   border: none;
   cursor: pointer;
   text-align: left;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 400;
-  color: #3a3a4a;
+  color: #6C01D7;
   line-height: 1.5;
   transition: background 0.2s ease;
+  border: 1px solid #6C01D7;
+  margin-bottom: 20px;
 }
 
 .faq-question:hover {

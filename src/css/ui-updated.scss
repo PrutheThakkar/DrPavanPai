@@ -1,0 +1,85 @@
+
+// body{
+//     background: url(../images/Pavan-Pai-Website-Background.png);
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position-y: 6%;
+// }
+
+// .reveal-brain {
+//   position: relative;
+//   width: 100%;
+//   cursor: none;
+//   --x: -500px;
+//   --y: -500px;
+// }
+
+// .reveal-brain img {
+//   width: 100%;
+//   height: auto;
+//   display: block;
+// }
+
+// .brain-color {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// .brain-bw {
+//   position: absolute;
+//   inset: 0;
+//   z-index: 2;
+//   filter: grayscale(1);
+//   pointer-events: none;
+//   transition: filter 0.5s ease, opacity 0.5s ease;
+
+//   -webkit-mask-image:
+//     radial-gradient(
+//       ellipse 520px 320px at var(--x) var(--y),
+//       transparent 0%,
+//       transparent 42%,
+//       rgba(0,0,0,0.15) 52%,
+//       rgba(0,0,0,0.65) 64%,
+//       black 78%
+//     );
+
+//   mask-image:
+//     radial-gradient(
+//       ellipse 520px 320px at var(--x) var(--y),
+//       transparent 0%,
+//       transparent 42%,
+//       rgba(0,0,0,0.15) 52%,
+//       rgba(0,0,0,0.65) 64%,
+//       black 78%
+//     );
+// }
+
+// .reveal-brain.is-hovering .brain-bw {
+//   filter: grayscale(1) contrast(1.12);
+// }
+
+// .reveal-brain::after {
+//   content: "";
+//   position: absolute;
+//   z-index: 3;
+//   left: var(--x);
+//   top: var(--y);
+//   width: 420px;
+//   height: 240px;
+//   transform: translate(-50%, -50%) rotate(-12deg);
+//   border-radius: 50%;
+//   pointer-events: none;
+//   opacity: 0;
+//   background: radial-gradient(
+//     ellipse,
+//     rgba(255,255,255,0.35) 0%,
+//     rgba(180,120,255,0.22) 35%,
+//     rgba(255,255,255,0) 70%
+//   );
+//   filter: blur(18px);
+//   transition: opacity 0.3s ease;
+// }
+
+// .reveal-brain.is-hovering::after {
+//   opacity: 1;
+// }

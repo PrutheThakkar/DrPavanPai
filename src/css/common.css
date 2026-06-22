@@ -380,7 +380,8 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: clamp(2.188rem, -2.2799rem + 5.2332vw, 4rem);
   font-family: "SourceSans3-Light";
-  color: #545555;
+  /* color: #545555; */
+  color: #FFFFFF;
   font-weight: lighter;
   margin-bottom: 30px;
 }
@@ -402,7 +403,7 @@ h2 {
   font-style: 500;
   font-family: "SourceSans3-SemiBold";
   flex-direction: column;
-  color: #695FAA;
+  color: #FFFFFF;
 }
 @media (max-width: 767px) {
   h2 {
@@ -463,6 +464,7 @@ p {
   font-size: clamp(0.938rem, -0.4477rem + 1.6231vw, 1.5rem);
   font-family: "SourceSans3-Regular";
   font-weight: 300;
+  color: #C2A2FF;
 }
 
 a {
@@ -612,16 +614,19 @@ header .wrapper {
   border-radius: 30px;
   padding: 20px;
   position: relative;
+  background: #F8F8F9;
+background: linear-gradient(90deg,rgba(248, 248, 249, 1) 7%, rgba(223, 223, 239, 1) 54%, rgba(228, 229, 242, 1) 100%);
 }
 header .wrapper::before {
-  background: linear-gradient(180deg, #8c8d8d, #8c8d8d 30%, #c0d0ef 60%, #e8eef8 80%, #fff);
+  /* background: linear-gradient(180deg, #8c8d8d, #8c8d8d 30%, #c0d0ef 60%, #e8eef8 80%, #fff); */
+  background: #fff;
   border-radius: 30px;
   content: "";
   inset: -2px;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  padding: 1px;
+  padding: 5px;
   pointer-events: none;
   position: absolute;
 }
@@ -1272,4 +1277,21 @@ Footer .footer-wrapper .contact-div .contact-link h3{
   Footer .footer-wrapper .contact-div .contact-link h3{
  text-align: center;
 }
+}
+
+
+
+footer p, footer h3, footer a {
+  color: #2E0652;
+}
+
+footer svg{
+  fill: #2E0652;
+}
+footer svg:hover{
+  fill: #646161;
+}
+
+footer .contact-link span{
+  margin-right: 5px;
 }

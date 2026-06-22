@@ -13,6 +13,13 @@ const getCols = () =>
     ? MOBILE_COLS
     : DESKTOP_COLS;
 
+const getSafeId = (value = "") =>
+  value
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
 // ── Specialty Card ──
 const SpecCard = ({ img, alt, label, index, isActive, onClick }) => (
   <article
@@ -21,14 +28,21 @@ const SpecCard = ({ img, alt, label, index, isActive, onClick }) => (
     onClick={onClick}
     role="button"
     tabIndex={0}
-    onKeyDown={(e) => e.key === "Enter" && onClick()}
+    onKeyDown={(e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onClick();
+      }
+    }}
   >
     <div className="sp-card__img-wrap">
-      <img src={img} alt={alt} loading="lazy" />
+      {img && <img src={img} alt={alt || label} loading="lazy" />}
+
       <div className="sp-card__overlay">
         <span className="sp-card__overlay-icon">{isActive ? "✕" : "+"}</span>
       </div>
     </div>
+
     <h3 className="sp-card__label">{label}</h3>
   </article>
 );
@@ -42,18 +56,27 @@ const DetailPanel = ({ card, onClose, panelRef }) => (
           className="sp-detail__close"
           onClick={onClose}
           aria-label="Close"
+          type="button"
         >
           ✕
         </button>
-        <div className="sp-detail__img">
-          <img
-            src={card.categoryImage?.node?.mediaItemUrl}
-            alt={card.categoryImage?.node?.altText || card.categoryTitle}
-          />
-        </div>
+
+        {card?.categoryImage?.node?.mediaItemUrl && (
+          <div className="sp-detail__img">
+            <img
+              src={card.categoryImage.node.mediaItemUrl}
+              alt={card.categoryImage.node.altText || card.categoryTitle}
+              loading="lazy"
+            />
+          </div>
+        )}
+
         <div className="sp-detail__body">
-          <h3 className="sp-detail__title">{card.categoryTitle}</h3>
-          <p className="sp-detail__text">{card.categoryContent}</p>
+          <h3 className="sp-detail__title">{card?.categoryTitle}</h3>
+
+          {card?.categoryContent && (
+            <p className="sp-detail__text">{card.categoryContent}</p>
+          )}
         </div>
       </div>
     </div>
@@ -63,28 +86,47 @@ const DetailPanel = ({ card, onClose, panelRef }) => (
 // ── Main Page ──
 const SpecialistPage = ({ data }) => {
   const [activeTab, setActiveTab] = useState(null);
-  const [activeCard, setActiveCard] = useState(null); // { tabId, idx }
+  const [activeCard, setActiveCard] = useState(null);
   const [cols, setCols] = useState(getCols);
   const panelRef = useRef(null);
 
-  // body class
   useEffect(() => {
     document.body.classList.add("inside-page");
-    return () => document.body.classList.remove("inside-page");
+
+    return () => {
+      document.body.classList.remove("inside-page");
+    };
   }, []);
 
-  // update cols on resize
   useEffect(() => {
     const onResize = () => {
       const next = getCols();
+
       setCols((prev) => {
-        if (prev !== next) { setActiveCard(null); }
+        if (prev !== next) {
+          setActiveCard(null);
+        }
+
         return next;
       });
     };
+
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
+
+  const tabs =
+    data?.allWpSpecialty?.edges?.map(({ node }) => ({
+      id: getSafeId(node.title),
+      label: node.title,
+      cards: node.specialties?.categoryContent || [],
+    })) || [];
+
+  const activeId = activeTab || tabs[0]?.id || "";
+  const activeTabData = tabs.find((tab) => tab.id === activeId) || tabs[0];
 
   const handleTabClick = useCallback((tabId) => {
     setActiveTab(tabId);
@@ -97,51 +139,79 @@ const SpecialistPage = ({ data }) => {
     );
   }, []);
 
-  const handleClose = useCallback(() => setActiveCard(null), []);
-
-  // Build tabs
-  const tabs = data?.allWpSpecialty?.edges?.map(({ node }) => ({
-    id: node.title,
-    label: node.title,
-    cards: node.specialties?.categoryContent || [],
-  })) || [];
-
-  const activeId = activeTab ?? tabs[0]?.id;
-  const activeTabData = tabs.find((t) => t.id === activeId);
+  const handleClose = useCallback(() => {
+    setActiveCard(null);
+  }, []);
 
   return (
-   <Layout>
+    <Layout>
       <>
-        {/* ── Inside Banner ── */}
         <InsideBanner
-          desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/03/inside-banner.jpg"
-          mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/03/inside-banner.jpg"
+          desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/inside-header-img.webp"
+          mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/inside-header-img.webp"
           alt="Specialties page banner"
           width={1440}
           height={500}
         />
 
-        {/* ── Specialties Tabs Section ── */}
         <section className="specialties-section" id="Areas-of-Clinical-focus">
           <div className="container">
-            <h2>Expertise & Specialties</h2>
-            <p>Clear insights into neurological conditions and advanced treatment options</p>
-            <div className="tab-section">
+            <h2>Expertise &amp; Specialties</h2>
 
-              {/* Tab Bar */}
-              <nav className="sp-tab-bar" role="tablist" aria-label="Specialty categories">
+            <p>
+              Clear insights into neurological conditions and advanced treatment
+              options
+            </p>
+
+            <div className="tab-section">
+              {/* Desktop Tab Bar */}
+              <nav
+                className="sp-tab-timeline"
+                role="tablist"
+                aria-label="Specialty categories"
+              >
                 {tabs.map((tab) => (
-                  <h3
+                  <button
                     key={tab.id}
+                    type="button"
                     role="tab"
-                    className={`sp-tab-btn${activeId === tab.id ? " active" : ""}`}
+                    className={`sp-tab-pill${activeId === tab.id ? " active" : ""
+                      }`}
                     aria-selected={activeId === tab.id}
+                    aria-controls={`sp-tab-${tab.id}`}
                     onClick={() => handleTabClick(tab.id)}
                   >
                     {tab.label}
-                  </h3>
+                  </button>
                 ))}
               </nav>
+
+              {/* Mobile Dropdown */}
+              <div className="sp-mobile-tab-dropdown">
+                <label
+                  htmlFor="specialty-mobile-select"
+                  className="sp-mobile-dropdown-label"
+                >
+                  Select Specialty
+                </label>
+
+                <div className="sp-mobile-select-wrap">
+                  <select
+                    id="specialty-mobile-select"
+                    value={activeId}
+                    onChange={(e) => handleTabClick(e.target.value)}
+                    aria-label="Select specialty category"
+                  >
+                    {tabs.map((tab) => (
+                      <option key={tab.id} value={tab.id}>
+                        {tab.label}
+                      </option>
+                    ))}
+                  </select>
+
+                  <span className="sp-mobile-select-arrow">⌄</span>
+                </div>
+              </div>
 
               {/* Active Panel */}
               <div
@@ -150,15 +220,16 @@ const SpecialistPage = ({ data }) => {
                 id={`sp-tab-${activeId}`}
                 role="tabpanel"
               >
-                {activeTabData?.cards.map((card, idx) => {
+                {activeTabData?.cards?.map((card, idx) => {
                   const isActive =
                     activeCard?.tabId === activeId && activeCard?.idx === idx;
 
-                  // which index to inject detail panel after
-                  const lastIdx = (activeTabData?.cards.length ?? 0) - 1;
+                  const lastIdx = (activeTabData?.cards?.length || 0) - 1;
+
                   const rowEnd = activeCard
                     ? Math.ceil((activeCard.idx + 1) / cols) * cols - 1
                     : null;
+
                   const injectAfter = activeCard
                     ? Math.min(rowEnd, lastIdx)
                     : null;
@@ -167,14 +238,16 @@ const SpecialistPage = ({ data }) => {
                     <React.Fragment key={card.categoryTitle || idx}>
                       <SpecCard
                         img={card.categoryImage?.node?.mediaItemUrl}
-                        alt={card.categoryImage?.node?.altText || card.categoryTitle}
+                        alt={
+                          card.categoryImage?.node?.altText ||
+                          card.categoryTitle
+                        }
                         label={card.categoryTitle}
                         index={idx}
                         isActive={isActive}
                         onClick={() => handleCardClick(activeId, idx)}
                       />
 
-                      {/* Inject detail panel after the correct row */}
                       {activeCard?.tabId === activeId &&
                         idx === injectAfter && (
                           <DetailPanel
@@ -188,12 +261,8 @@ const SpecialistPage = ({ data }) => {
                 })}
               </div>
             </div>
-
           </div>
         </section>
-
-        {/* ── Styles ── */}
-
       </>
     </Layout>
   );
@@ -201,7 +270,6 @@ const SpecialistPage = ({ data }) => {
 
 export default SpecialistPage;
 
-// ── GraphQL Query ──
 export const query = graphql`
   query SpecialistPageQuery {
     allWpSpecialty(sort: { fields: title, order: ASC }) {

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Layout from "../components/Layout-new";
+import { initHomeAnimation } from "../js/home-animation"
 
 const IndexPage = ({ data }) => {
 
@@ -27,8 +28,26 @@ const IndexPage = ({ data }) => {
   const doctorImgUrl = aboutDoctorImage?.node?.mediaItemUrl;
   const doctorImgAlt = aboutDoctorImage?.node?.altText || "Dr Pavan Pai";
 
+  useEffect(() => {
+  if (typeof window === "undefined") return;
+
+  const startAnimation = () => {
+    initHomeAnimation();
+  };
+
+  if (document.readyState === "complete") {
+    startAnimation();
+  } else {
+    window.addEventListener("load", startAnimation);
+  }
+
+  return () => {
+    window.removeEventListener("load", startAnimation);
+  };
+}, []);
+
   return (
-   <Layout>
+   <Layout showPreloader={true}>
       <>
         {/* ── Hero Section ── */}
         <section className="hero-section">
@@ -42,9 +61,17 @@ const IndexPage = ({ data }) => {
             </div>
 
             <div className="right">
-              <div className="brain-wrapper">
+              <div className="brain-wrapper reveal-brain">
                 {brainImgUrl && (
-                  <img src={brainImgUrl} alt={brainImgAlt} />
+                  <>
+                    <img
+                      className="brain-color"
+                      src={brainImgUrl}
+                      alt={brainImgAlt}
+                    />
+
+                   
+                  </>
                 )}
               </div>
             </div>
@@ -54,7 +81,7 @@ const IndexPage = ({ data }) => {
         {/* ── About Section ── */}
         <section className="about-section">
           <div className="container">
-            <div className="left"> 
+            <div className="left">
               <div className="img">
                 {doctorImgUrl && (
                   <img src={doctorImgUrl} alt={doctorImgAlt} />
@@ -80,10 +107,6 @@ const IndexPage = ({ data }) => {
 
         {/* ── Clinical Focus + Patients Choose ── */}
         <section className="Clinical-Focus-wrapper">
-          <div className="bg-img">
-            <img src="https://app.drpavanpai.com/wp-content/uploads/2026/03/bg-face.svg" alt="face bg" />
-          </div>
-
           {/* Clinical Focus */}
           <div className="Clinical-Focus">
             <div className="container">
@@ -117,8 +140,9 @@ const IndexPage = ({ data }) => {
               <div className="right"></div>
             </div>
           </div>
+        </section>
 
-          {/* Patients Choose */}
+        <section className="patient-choose">
           <div className="Patients-Choose">
             <div className="container">
               <div className="left">
@@ -155,8 +179,9 @@ const IndexPage = ({ data }) => {
             </div>
           </div>
         </section>
+        
       </>
-  </Layout>
+    </Layout>
   );
 };
 

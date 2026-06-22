@@ -11,7 +11,7 @@ const InsideBanner = ({
 }) => {
   return (
     <section className="inside-banner">
-      <div className="container">
+      {/* <div className="container"> */}
         <picture>
           {/* Mobile: up to 768px */}
           <source
@@ -46,7 +46,7 @@ const InsideBanner = ({
             loading="eager"
           />
         </picture>
-      </div>
+      {/* </div> */}
     </section>
   );
 };

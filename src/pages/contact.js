@@ -17,8 +17,8 @@ const ExpertisePage = ({ data }) => {
   return (
     <Layout>
     <InsideBanner
-          desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/03/inside-banner.jpg"
-          mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/03/inside-banner.jpg"
+          desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
+        mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
           alt="FAQ page banner"
           width={1440}
           height={500}

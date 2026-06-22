@@ -1,0 +1,354 @@
+.inside-page .header-logo .purple-logo{
+   display: none;
+}
+.header-logo .white-logo{
+   display: none;
+}
+.inside-page .header-logo .white-logo{
+   display: block;
+}
+
+header .wrapper .logo {
+  width: 478px;
+  height: auto;
+}
+@media (max-width: 1920px) {
+  header .wrapper .logo {
+    width: 400px;
+  }
+}
+@media (max-width: 1680px) {
+  header .wrapper .logo {
+    width: 300px;
+  }
+}
+@media (max-width: 1280px) {
+  header .wrapper .logo {
+    width: px;
+  }
+}
+@media (max-width: 1075px) {
+  header .wrapper .logo {
+    width: 200px;
+  }
+}
+@media (max-width: 767px) {
+  header .wrapper .logo {
+    width: 200px;
+  }
+}
+@media (max-width: 520px) {
+  header .wrapper .logo {
+    width: 180px;
+  }
+}
+header .wrapper .logo img {
+  width: 100%;
+  height: auto;
+}
+
+
+.hero-section .brain-wrapper,
+.about-section .left .img,
+.Clinical-Focus ul li .img-wrap,
+.patient-choose .Patients-Choose ul li .img-wrap {
+  will-change: transform, opacity;
+}
+
+.about-section .left .img {
+  overflow: hidden;
+}
+
+
+
+/* preloader */
+
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background:
+    radial-gradient(circle at 65% 35%, rgba(236, 92, 210, 0.32), transparent 34%),
+    radial-gradient(circle at 35% 65%, rgba(70, 210, 210, 0.28), transparent 32%),
+    linear-gradient(135deg, #21005f 0%, #36008a 45%, #5e1bb8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+.site-preloader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preloader-logo-wrap {
+  width: clamp(150px, 14vw, 230px);
+  height: clamp(150px, 14vw, 230px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-logo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  animation: preloaderRotate 8s linear infinite;
+}
+
+.preloader-logo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  filter: blur(2px);
+  animation: logoPulse 1.8s ease-in-out infinite;
+}
+
+.preloader-logo {
+  width: clamp(95px, 9vw, 155px);
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 3;
+  filter: brightness(0) invert(1);
+  animation: logoFloat 2.4s ease-in-out infinite;
+}
+
+.orbit-dot {
+  position: absolute;
+  width: clamp(12px, 1vw, 18px);
+  height: clamp(12px, 1vw, 18px);
+  border-radius: 50%;
+  background: #ffffff;
+  z-index: 4;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.65);
+}
+
+.dot-1 {
+  top: 8%;
+  left: 50%;
+  animation: orbitOne 3.8s linear infinite;
+}
+
+.dot-2 {
+  right: 7%;
+  top: 46%;
+  background: #70d7ff;
+  animation: orbitTwo 4.4s linear infinite;
+}
+
+.dot-3 {
+  bottom: 9%;
+  left: 48%;
+  background: #ff77d9;
+  animation: orbitThree 5s linear infinite;
+}
+
+.dot-4 {
+  left: 8%;
+  top: 45%;
+  background: #c6b3ff;
+  animation: orbitFour 4.8s linear infinite;
+}
+
+.preloader-text {
+  margin-top: 18px;
+  color: #ffffff;
+  font-size: clamp(13px, 1vw, 16px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.86;
+}
+
+.preloader-line {
+  width: clamp(180px, 18vw, 280px);
+  height: 3px;
+  margin-top: 18px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.preloader-line span {
+  display: block;
+  width: 45%;
+  height: 100%;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #ffffff, #70d7ff, #ff77d9);
+  animation: preloaderLine 1.15s ease-in-out infinite;
+}
+
+.preloader-bg-lines span {
+  position: absolute;
+  width: 42vw;
+  height: 42vw;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 45% 55% 60% 40%;
+  animation: bgWave 12s linear infinite;
+}
+
+.preloader-bg-lines span:nth-child(1) {
+  top: -18vw;
+  left: -8vw;
+}
+
+.preloader-bg-lines span:nth-child(2) {
+  right: -14vw;
+  bottom: -18vw;
+  animation-duration: 15s;
+}
+
+.preloader-bg-lines span:nth-child(3) {
+  top: 35%;
+  left: 42%;
+  width: 28vw;
+  height: 28vw;
+  animation-duration: 10s;
+}
+
+.site-wrapper {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.site-wrapper.site-loaded {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s ease;
+}
+
+@keyframes preloaderRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 0.9;
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes orbitOne {
+  from {
+    transform: rotate(0deg) translateX(84px) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(84px) rotate(-360deg);
+  }
+}
+
+@keyframes orbitTwo {
+  from {
+    transform: rotate(90deg) translateX(76px) rotate(-90deg);
+  }
+
+  to {
+    transform: rotate(450deg) translateX(76px) rotate(-450deg);
+  }
+}
+
+@keyframes orbitThree {
+  from {
+    transform: rotate(180deg) translateX(70px) rotate(-180deg);
+  }
+
+  to {
+    transform: rotate(540deg) translateX(70px) rotate(-540deg);
+  }
+}
+
+@keyframes orbitFour {
+  from {
+    transform: rotate(270deg) translateX(78px) rotate(-270deg);
+  }
+
+  to {
+    transform: rotate(630deg) translateX(78px) rotate(-630deg);
+  }
+}
+
+@keyframes preloaderLine {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(240%);
+  }
+}
+
+@keyframes bgWave {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.08);
+  }
+
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@media (max-width: 767px) {
+  .preloader-logo-wrap {
+    width: 150px;
+    height: 150px;
+  }
+
+  .preloader-logo {
+    width: 100px;
+  }
+
+  .preloader-text {
+    font-size: 11px;
+    letter-spacing: 1.4px;
+  }
+
+  .preloader-line {
+    width: 190px;
+  }
+}
+/* preloader */
+
+.mobile-btn{
+  margin-top: 20px;
+}
