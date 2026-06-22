@@ -14,15 +14,107 @@ import "../css/about.css";
 import "../css/uifixer.css";
 import "../css/ui-updated.css";
 
+const cleanNbspInPage = () => {
+  if (typeof document === "undefined") return;
+
+  const walker = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode: (node) => {
+        const parent = node.parentElement;
+
+        if (!parent) return NodeFilter.FILTER_REJECT;
+
+        const blockedTags = [
+          "SCRIPT",
+          "STYLE",
+          "NOSCRIPT",
+          "TEXTAREA",
+          "INPUT",
+          "CODE",
+          "PRE",
+        ];
+
+        if (blockedTags.includes(parent.tagName)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+
+        return NodeFilter.FILTER_ACCEPT;
+      },
+    }
+  );
+
+  const textNodes = [];
+
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  textNodes.forEach((node) => {
+    const oldValue = node.nodeValue;
+
+    const newValue = oldValue
+      .replace(/\u00A0/g, " ")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&#160;/g, " ")
+      .replace(/\s{2,}/g, " ");
+
+    if (oldValue !== newValue) {
+      node.nodeValue = newValue;
+    }
+  });
+};
+
 const Layout = ({ children, showPreloader = false }) => {
   const [isLoaded, setIsLoaded] = useState(!showPreloader);
   const [hidePreloader, setHidePreloader] = useState(!showPreloader);
 
   useEffect(() => {
-    if (!showPreloader) return;
+    if (typeof window === "undefined") return;
+
+    let cleanTimer;
+
+    const scheduleClean = () => {
+      clearTimeout(cleanTimer);
+
+      cleanTimer = setTimeout(() => {
+        cleanNbspInPage();
+      }, 120);
+    };
+
+    scheduleClean();
+
+    const observer = new MutationObserver(() => {
+      scheduleClean();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+
+    window.addEventListener("preloaderFinished", scheduleClean);
+
+    return () => {
+      clearTimeout(cleanTimer);
+      observer.disconnect();
+      window.removeEventListener("preloaderFinished", scheduleClean);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showPreloader) {
+      document.body.classList.add("preloader-finished");
+      return;
+    }
+
     if (typeof window === "undefined") return;
 
     let isFinished = false;
+
+    document.body.classList.remove("preloader-finished");
 
     const finishLoading = () => {
       if (isFinished) return;
@@ -36,8 +128,8 @@ const Layout = ({ children, showPreloader = false }) => {
 
           document.body.classList.add("preloader-finished");
           window.dispatchEvent(new Event("preloaderFinished"));
-        }, 700);
-      }, 1200);
+        }, 600);
+      }, 700);
     };
 
     if (document.readyState === "complete") {
@@ -48,7 +140,7 @@ const Layout = ({ children, showPreloader = false }) => {
 
     const fallbackTimer = setTimeout(() => {
       finishLoading();
-    }, 4500);
+    }, 2500);
 
     return () => {
       window.removeEventListener("load", finishLoading);

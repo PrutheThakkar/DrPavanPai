@@ -92,6 +92,11 @@
   flex: 1;
   /* gap: 20px; */
 }
+@media (max-width:767px) {
+  .blog-card__body{
+    padding: 20px 0 ;
+  }
+}
 
 .blog-card__title {
  
@@ -150,7 +155,7 @@
 }
 
 p.bold{
- font-family: "SourceSans3-SemiBold";
+ font-family: "gotham_book";
 }
 
 .detail-wrapper{
@@ -171,4 +176,10 @@ p.bold{
 
 .detail-wrapper h4{
   margin-bottom: 30px;
+  color: #fff;
+   font-family: "gotham_medium";
+   margin-top: 90px;
+}
+.detail-wrapper a, .detail-wrapper ul {
+  color: #C2A2FF;
 }

@@ -332,7 +332,7 @@ bottom: 0;
   }
 }
 .Clinical-Focus-wrapper .Clinical-Focus .left ul li h3 {
-  font-family: "SourceSans3-SemiBold";
+   font-family: "gotham_bold";
   font-size: clamp(0.875rem, 0.2586rem + 0.722vw, 1.125rem);
   text-align: left;
   color: #fff;
@@ -352,7 +352,10 @@ position: relative;
 margin-bottom: 0;
 padding-bottom: 120px;
 }
-
+.patient-choose .Patients-Choose .left{
+z-index: 99;
+position: relative;
+}
 .patient-choose .Patients-Choose ul li{
   display: flex;
   align-items: center;

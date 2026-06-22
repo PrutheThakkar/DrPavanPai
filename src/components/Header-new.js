@@ -134,7 +134,7 @@ const Header = () => {
           <li>
             <Link
               to="/contact"
-              className="btn mobile-btn"
+              className="mobile-cta"
               onClick={() => setMenuOpen(false)}
             >
               Reach out

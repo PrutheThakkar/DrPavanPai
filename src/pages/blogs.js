@@ -34,8 +34,8 @@ const BlogListing = ({ data }) => {
     <Layout>
       {/* ── Inside Banner ── */}
       <InsideBanner
-        desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
-        mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
+        desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_banner-new.webp"
+        mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_banner-new.webp"
         alt="Blog page banner"
         width={1440}
         height={500}

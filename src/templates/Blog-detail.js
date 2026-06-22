@@ -1,12 +1,13 @@
 import React, { useEffect } from "react"
-import { graphql, Link } from "gatsby"
-import InsideBanner from "../components/Inside-Banner";
-import Layout from "../components/Layout-new";
+import { graphql } from "gatsby"
+import InsideBanner from "../components/Inside-Banner"
+import Layout from "../components/Layout-new"
 import "../css/blog.css"
 
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
     wpPost(slug: { eq: $slug }) {
+      slug
       title
       content
       featuredImage {
@@ -16,46 +17,112 @@ export const query = graphql`
         }
       }
     }
+
+    allWpPost(sort: { fields: date, order: DESC }) {
+      nodes {
+        slug
+      }
+    }
   }
 `
 
+const normalizeSlug = (slug = "") => {
+  return slug
+    .toString()
+    .trim()
+    .replace(/^\/+|\/+$/g, "")
+    .split("/")
+    .pop()
+}
+
+// Optional exact slug mapping
+// Add actual blog slugs here later if needed
+const blogBannerImages = {
+  // example:
+  // "stroke-treatment": {
+  //   desktop: "https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_3_banner-new-desk.webp",
+  //   mobile: "https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_3_banner-new-desk.webp",
+  // },
+}
+
+// Automatic banner order
+const blogBannerList = [
+  {
+    desktop:
+      "https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_3_banner-new-desk.webp",
+    mobile:
+      "https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_3_banner-new-desk.webp",
+  },
+  {
+    desktop:
+      "https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_2_banner-new-desk.webp",
+    mobile:
+      "https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_2_banner-new-desk.webp",
+  },
+  {
+    desktop:
+      "https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_1_banner-new-desk.webp",
+    mobile:
+      "https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_1_banner-new-desk.webp",
+  },
+]
+
 const BlogDetail = ({ data }) => {
-  const post = data.wpPost
-  const img = post.featuredImage?.node
+  const post = data?.wpPost
+  const img = post?.featuredImage?.node
+  const allPosts = data?.allWpPost?.nodes || []
 
   useEffect(() => {
-    document.body.classList.add("inside-page");
-    return () => document.body.classList.remove("inside-page");
-  }, []);
+    document.body.classList.add("inside-page")
+    return () => document.body.classList.remove("inside-page")
+  }, [])
+
+  if (!post) return null
+
+  const fallbackBanner =
+    "https://app.drpavanpai.com/wp-content/uploads/2026/03/inside-banner.jpg"
+
+  const currentSlug = normalizeSlug(post.slug)
+
+  const currentPostIndex = allPosts.findIndex(
+    (item) => normalizeSlug(item.slug) === currentSlug
+  )
+
+  const exactSlugBanner = blogBannerImages[currentSlug]
+
+  const orderBanner =
+    currentPostIndex >= 0
+      ? blogBannerList[currentPostIndex % blogBannerList.length]
+      : null
+
+  const selectedBanner = exactSlugBanner || orderBanner
+
+  const desktopBanner =
+    selectedBanner?.desktop || img?.mediaItemUrl || fallbackBanner
+
+  const mobileBanner =
+    selectedBanner?.mobile ||
+    selectedBanner?.desktop ||
+    img?.mediaItemUrl ||
+    fallbackBanner
 
   return (
     <Layout>
-      {/* ── Inside Banner ── */}
       <InsideBanner
-        desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/03/inside-banner.jpg"
-        mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/03/inside-banner.jpg"
-        alt="Blog page banner"
+        desktopImage={desktopBanner}
+        mobileImage={mobileBanner}
+        alt={img?.altText || post.title || "Blog page banner"}
         width={1440}
         height={500}
       />
 
       <section>
         <div className="detail-wrapper">
-          {/* Hero */}
           <div className="detail-hero">
             <div className="container">
-              {/* {img && (
-            <div className="detail-hero__image-wrap">
-              <img
-                src={img.mediaItemUrl}
-                alt={img.altText || post.title}
-                className="detail-hero__image"
-              />
-              <div className="detail-hero__image-overlay" />
-            </div>
-          )} */}
               <div className="detail-hero__content">
-                <h1 className="detail-hero__title">{post.title}</h1>
+                <h2 className="detail-hero__title">{post.title}</h2>
+
                 <div
                   className="detail-content"
                   dangerouslySetInnerHTML={{ __html: post.content }}

@@ -54,7 +54,7 @@ const IndexPage = ({ data }) => {
           <div className="container">
             <div className="left">
               <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
-              <p dangerouslySetInnerHTML={{ __html: homeHeroPara }} />
+              <span dangerouslySetInnerHTML={{ __html: homeHeroPara }} />
               <div className="btn-wrap">
                 <Link to="/contact" className="btn">Book an Appointment</Link>
               </div>
@@ -172,7 +172,7 @@ const IndexPage = ({ data }) => {
                   ))}
                 </ul>
                 <div className="btn-wrap">
-                  <Link to="/about" className="btn">Read More</Link>
+                  <Link to="/specialties" className="btn">Read More</Link>
                 </div>
               </div>
               <div className="right"></div>
