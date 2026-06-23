@@ -8,7 +8,7 @@ const Header = () => {
   const navLinks = [
     { label: "Home", to: "/" },
     { label: "About", to: "/about" },
-    { label: "Specialties ", to: "/specialties" },
+    { label: "Specialties", to: "/specialties" },
     { label: "Blogs", to: "/blogs" },
     { label: "FAQ", to: "/faq" },
   ];
@@ -27,7 +27,14 @@ const Header = () => {
     setMegaOpen((prev) => !prev);
   };
 
-  const closeMega = () => setMegaOpen(false);
+  const closeMega = () => {
+    setMegaOpen(false);
+  };
+
+  const closeMobileMenu = () => {
+    setMenuOpen(false);
+    setMegaOpen(false);
+  };
 
   return (
     <header className="header-wrapper">
@@ -36,9 +43,17 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="header-logo" onClick={closeMega}>
             <div className="logo">
-              <img className="purple-logo" src="https://app.drpavanpai.com/wp-content/uploads/2026/04/logo-updtaed.svg" alt="Dr. Pavan Pai Logo" />
-              <img className="white-logo" src="https://app.drpavanpai.com/wp-content/uploads/2026/06/white-new-logo.svg " alt="Dr. Pavan Pai Logo" />
+              <img
+                className="purple-logo"
+                src="https://app.drpavanpai.com/wp-content/uploads/2026/04/logo-updtaed.svg"
+                alt="Dr. Pavan Pai Logo"
+              />
 
+              <img
+                className="white-logo"
+                src="https://app.drpavanpai.com/wp-content/uploads/2026/06/white-new-logo.svg"
+                alt="Dr. Pavan Pai Logo"
+              />
             </div>
           </Link>
 
@@ -50,6 +65,7 @@ const Header = () => {
                   to={link.to}
                   className="nav-link"
                   activeClassName="nav-link--active"
+                  partiallyActive={link.to !== "/"}
                   onClick={closeMega}
                 >
                   {link.label}
@@ -57,13 +73,11 @@ const Header = () => {
               </li>
             ))}
 
-          
-
-            {/* CTA as nav item */}
             <li className="menu-item contact">
               <Link
                 to="/contact"
                 className="cta-button"
+                activeClassName="cta-button--active"
                 onClick={closeMega}
               >
                 Reach out
@@ -73,12 +87,14 @@ const Header = () => {
 
           {/* Mobile Hamburger */}
           <button
+            type="button"
             className={`hamburger ${menuOpen ? "hamburger--open" : ""}`}
             onClick={() => {
-              setMenuOpen(!menuOpen);
+              setMenuOpen((prev) => !prev);
               closeMega();
             }}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
             <span />
             <span />
@@ -95,47 +111,21 @@ const Header = () => {
               <Link
                 to={link.to}
                 className="mobile-nav-link"
-                onClick={() => setMenuOpen(false)}
+                activeClassName="mobile-nav-link--active"
+                partiallyActive={link.to !== "/"}
+                onClick={closeMobileMenu}
               >
                 {link.label}
               </Link>
             </li>
           ))}
 
-          {/* Mobile Specialties */}
-          {/* <li>
-            <button
-              className="mobile-nav-link mobile-mega-toggle"
-              onClick={toggleMega}
-              aria-expanded={megaOpen}
-            >
-              Specialties <span>{megaOpen ? "▴" : "▾"}</span>
-            </button>
-            {megaOpen && (
-              <ul className="mobile-mega-list">
-                {specialties.map((item) => (
-                  <li key={item.label}>
-                    <Link
-                      to={item.to}
-                      className="mobile-mega-link"
-                      onClick={() => {
-                        setMenuOpen(false);
-                        closeMega();
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li> */}
-
           <li>
             <Link
               to="/contact"
               className="mobile-cta"
-              onClick={() => setMenuOpen(false)}
+              activeClassName="mobile-cta--active"
+              onClick={closeMobileMenu}
             >
               Reach out
             </Link>

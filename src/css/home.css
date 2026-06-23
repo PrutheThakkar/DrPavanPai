@@ -254,6 +254,7 @@ background: #FCFAFF;
 background: linear-gradient(0deg,rgba(252, 250, 255, 0.15) 0%, rgba(55, 2, 99, 0) 43%);
 position: absolute;
 bottom: 0;
+z-index: -1;
 }
 
 .Clinical-Focus-wrapper .bg-img {

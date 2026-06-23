@@ -1282,3 +1282,30 @@ footer svg:hover{
 footer .contact-link span{
   margin-right: 5px;
 }
+
+.nav-link {
+  transition: color 0.3s ease;
+}
+
+.nav-link--active {
+  color: #C2A2FF !important;
+}
+
+.mobile-nav-link {
+  transition: color 0.3s ease;
+}
+
+.mobile-nav-link--active {
+  color: #C2A2FF !important;
+  font-weight: 600;
+}
+
+.cta-button--active {
+  color: #ffffff !important;
+  background: #C2A2FF !important;
+}
+
+.mobile-cta--active {
+  color: #ffffff !important;
+  background: #C2A2FF !important;
+}
