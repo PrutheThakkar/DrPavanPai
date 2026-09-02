@@ -13,6 +13,17 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sass`,
     {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [
+          `/404/`,
+          `/404.html`,
+          `/dev-404-page/`,
+          `/blog/hello-world/`,
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-wordpress`,
       options: {
         url:

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://drpavanpai.com/sitemap-index.xml
