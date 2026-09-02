@@ -1,9 +1,11 @@
 // src/pages/faq.js
 
-import React, { useEffect } from "react";
-import { graphql } from "gatsby";
-import InsideBanner from "../components/Inside-Banner";
-import Layout from "../components/Layout-new";
+import React, { useEffect } from "react"
+import { graphql } from "gatsby"
+import InsideBanner from "../components/Inside-Banner"
+import Layout from "../components/Layout-new"
+import SeoMeta from "../components/SeoMeta"
+import { pageSeo, siteUrl } from "../data/seo"
 
 // ── Single FAQ Item ──
 const FaqItem = ({ question, answer }) => (
@@ -15,21 +17,21 @@ const FaqItem = ({ question, answer }) => (
       <p>{answer}</p>
     </div>
   </li>
-);
+)
 
 // ── Main Page ──
 const FaqPage = ({ data }) => {
-
   // body class
   useEffect(() => {
-    document.body.classList.add("inside-page");
-    return () => document.body.classList.remove("inside-page");
-  }, []);
+    document.body.classList.add("inside-page")
+    return () => document.body.classList.remove("inside-page")
+  }, [])
 
   // Flatten all FAQ items from all edges
-  const faqs = data?.allWpFaq?.edges?.flatMap(({ node }) =>
-    node.faqPage?.faqSection || []
-  ) || [];
+  const faqs =
+    data?.allWpFaq?.edges?.flatMap(
+      ({ node }) => node.faqPage?.faqSection || []
+    ) || []
 
   return (
     <Layout>
@@ -37,7 +39,7 @@ const FaqPage = ({ data }) => {
         {/* ── Inside Banner ── */}
         <InsideBanner
           desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
-        mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
+          mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
           alt="FAQ page banner"
           width={1440}
           height={500}
@@ -46,7 +48,6 @@ const FaqPage = ({ data }) => {
         {/* ── FAQ Section ── */}
         <section className="faq-section">
           <div className="container">
-
             <div className="faq-header">
               <h2 className="faq-heading">Frequently Asked Questions</h2>
               <p>Answers to help you feel informed and confident</p>
@@ -65,15 +66,14 @@ const FaqPage = ({ data }) => {
             ) : (
               <p className="faq-empty">No FAQs found.</p>
             )}
-
           </div>
         </section>
       </>
     </Layout>
-  );
-};
+  )
+}
 
-export default FaqPage;
+export default FaqPage
 
 // ── GraphQL Query ──
 export const query = graphql`
@@ -91,14 +91,28 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export const Head = () => (
-  <>
-    <title>FAQ | Dr. Pavan Pai</title>
-    <meta
-      name="description"
-      content="Frequently asked questions about neurology care, treatments, and consultations with Dr. Pavan Pai."
-    />
-  </>
-);
+export const Head = ({ data }) => {
+  const faqs =
+    data?.allWpFaq?.edges?.flatMap(
+      ({ node }) => node.faqPage?.faqSection || []
+    ) || []
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    url: `${siteUrl}/faq/`,
+    mainEntity: faqs.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: answer
+          ?.replace(/<[^>]*>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim(),
+      },
+    })),
+  }
+  return <SeoMeta {...pageSeo.faq} schema={schema} />
+}

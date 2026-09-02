@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react"
 import { graphql, Link } from "gatsby"
-import InsideBanner from "../components/Inside-Banner";
-import Layout from "../components/Layout-new";
+import InsideBanner from "../components/Inside-Banner"
+import Layout from "../components/Layout-new"
 import "../css/blog.css"
+import SeoMeta from "../components/SeoMeta"
+import { pageSeo } from "../data/seo"
 
 export const query = graphql`
   query MyQuery {
@@ -26,9 +28,9 @@ const BlogListing = ({ data }) => {
   const posts = data.allWpPost.nodes
 
   useEffect(() => {
-    document.body.classList.add("inside-page");
-    return () => document.body.classList.remove("inside-page");
-  }, []);
+    document.body.classList.add("inside-page")
+    return () => document.body.classList.remove("inside-page")
+  }, [])
 
   return (
     <Layout>
@@ -43,7 +45,6 @@ const BlogListing = ({ data }) => {
 
       <section className="blog-section">
         <div className="blog-section__inner container">
-
           {/* Section Heading */}
           <div className="blog-section__header">
             <h1 className="blog-section__title">Blogs</h1>
@@ -54,7 +55,7 @@ const BlogListing = ({ data }) => {
 
           {/* Cards Grid */}
           <div className="blog-grid">
-            {posts.map((post) => {
+            {posts.map(post => {
               const img = post.featuredImage?.node
 
               return (
@@ -73,19 +74,16 @@ const BlogListing = ({ data }) => {
 
                   <div className="blog-card__body">
                     <h3 className="blog-card__title">{post.title}</h3>
-                     <div class="btn-wrap">
-                    <Link to={`/blog/${post.slug}`} className="btn">
-                      Read More
-                    </Link>
+                    <div class="btn-wrap">
+                      <Link to={`/blog/${post.slug}`} className="btn">
+                        Read More
+                      </Link>
+                    </div>
                   </div>
-                  </div>
-
-              
                 </div>
               )
             })}
           </div>
-
         </div>
       </section>
     </Layout>
@@ -93,3 +91,5 @@ const BlogListing = ({ data }) => {
 }
 
 export default BlogListing
+
+export const Head = () => <SeoMeta {...pageSeo.blogs} />

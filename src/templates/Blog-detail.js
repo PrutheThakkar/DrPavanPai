@@ -3,6 +3,8 @@ import { graphql } from "gatsby"
 import InsideBanner from "../components/Inside-Banner"
 import Layout from "../components/Layout-new"
 import "../css/blog.css"
+import SeoMeta from "../components/SeoMeta"
+import { getBlogSeo } from "../data/seo"
 
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
@@ -85,7 +87,7 @@ const BlogDetail = ({ data }) => {
   const currentSlug = normalizeSlug(post.slug)
 
   const currentPostIndex = allPosts.findIndex(
-    (item) => normalizeSlug(item.slug) === currentSlug
+    item => normalizeSlug(item.slug) === currentSlug
   )
 
   const exactSlugBanner = blogBannerImages[currentSlug]
@@ -137,3 +139,24 @@ const BlogDetail = ({ data }) => {
 }
 
 export default BlogDetail
+
+export const Head = ({ data }) => {
+  const post = data?.wpPost
+  if (!post) return null
+  const seo = getBlogSeo({
+    title: post.title,
+    slug: post.slug,
+    description: post.content,
+    image: post.featuredImage?.node?.mediaItemUrl,
+  })
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: seo.title,
+    description: seo.description,
+    url: seo.canonical,
+    image: seo.image,
+    author: { "@type": "Person", name: "Dr. Pavan Pai" },
+  }
+  return <SeoMeta {...seo} schema={schema} />
+}

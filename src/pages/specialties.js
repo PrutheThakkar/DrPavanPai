@@ -1,24 +1,26 @@
 // src/pages/specialist.js
 
-import React, { useState, useCallback, useEffect, useRef } from "react";
-import { graphql } from "gatsby";
-import InsideBanner from "../components/Inside-Banner";
-import Layout from "../components/Layout-new";
+import React, { useState, useCallback, useEffect, useRef } from "react"
+import { graphql } from "gatsby"
+import InsideBanner from "../components/Inside-Banner"
+import Layout from "../components/Layout-new"
+import SeoMeta from "../components/SeoMeta"
+import { pageSeo } from "../data/seo"
 
-const DESKTOP_COLS = 3;
-const MOBILE_COLS = 2;
+const DESKTOP_COLS = 3
+const MOBILE_COLS = 2
 
 const getCols = () =>
   typeof window !== "undefined" && window.innerWidth <= 768
     ? MOBILE_COLS
-    : DESKTOP_COLS;
+    : DESKTOP_COLS
 
 const getSafeId = (value = "") =>
   value
     .toString()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+    .replace(/(^-|-$)/g, "")
 
 // ── Specialty Card ──
 const SpecCard = ({ img, alt, label, index, isActive, onClick }) => (
@@ -28,10 +30,10 @@ const SpecCard = ({ img, alt, label, index, isActive, onClick }) => (
     onClick={onClick}
     role="button"
     tabIndex={0}
-    onKeyDown={(e) => {
+    onKeyDown={e => {
       if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        onClick();
+        e.preventDefault()
+        onClick()
       }
     }}
   >
@@ -45,7 +47,7 @@ const SpecCard = ({ img, alt, label, index, isActive, onClick }) => (
 
     <h3 className="sp-card__label">{label}</h3>
   </article>
-);
+)
 
 // ── Detail Panel ──
 const DetailPanel = ({ card, onClose, panelRef }) => (
@@ -81,67 +83,67 @@ const DetailPanel = ({ card, onClose, panelRef }) => (
       </div>
     </div>
   </div>
-);
+)
 
 // ── Main Page ──
 const SpecialistPage = ({ data }) => {
-  const [activeTab, setActiveTab] = useState(null);
-  const [activeCard, setActiveCard] = useState(null);
-  const [cols, setCols] = useState(getCols);
-  const panelRef = useRef(null);
+  const [activeTab, setActiveTab] = useState(null)
+  const [activeCard, setActiveCard] = useState(null)
+  const [cols, setCols] = useState(getCols)
+  const panelRef = useRef(null)
 
   useEffect(() => {
-    document.body.classList.add("inside-page");
+    document.body.classList.add("inside-page")
 
     return () => {
-      document.body.classList.remove("inside-page");
-    };
-  }, []);
+      document.body.classList.remove("inside-page")
+    }
+  }, [])
 
   useEffect(() => {
     const onResize = () => {
-      const next = getCols();
+      const next = getCols()
 
-      setCols((prev) => {
+      setCols(prev => {
         if (prev !== next) {
-          setActiveCard(null);
+          setActiveCard(null)
         }
 
-        return next;
-      });
-    };
+        return next
+      })
+    }
 
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize)
 
     return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
+      window.removeEventListener("resize", onResize)
+    }
+  }, [])
 
   const tabs =
     data?.allWpSpecialty?.edges?.map(({ node }) => ({
       id: getSafeId(node.title),
       label: node.title,
       cards: node.specialties?.categoryContent || [],
-    })) || [];
+    })) || []
 
-  const activeId = activeTab || tabs[0]?.id || "";
-  const activeTabData = tabs.find((tab) => tab.id === activeId) || tabs[0];
+  const activeId = activeTab || tabs[0]?.id || ""
+  const activeTabData = tabs.find(tab => tab.id === activeId) || tabs[0]
 
-  const handleTabClick = useCallback((tabId) => {
-    setActiveTab(tabId);
-    setActiveCard(null);
-  }, []);
+  const handleTabClick = useCallback(tabId => {
+    setActiveTab(tabId)
+    setActiveCard(null)
+  }, [])
 
   const handleCardClick = useCallback((tabId, idx) => {
-    setActiveCard((prev) =>
+    setActiveCard(prev =>
       prev?.tabId === tabId && prev?.idx === idx ? null : { tabId, idx }
-    );
-  }, []);
+    )
+  }, [])
 
   const handleClose = useCallback(() => {
-    setActiveCard(null);
-  }, []);
+    setActiveCard(null)
+  }, [])
 
   return (
     <Layout>
@@ -170,13 +172,14 @@ const SpecialistPage = ({ data }) => {
                 role="tablist"
                 aria-label="Specialty categories"
               >
-                {tabs.map((tab) => (
+                {tabs.map(tab => (
                   <button
                     key={tab.id}
                     type="button"
                     role="tab"
-                    className={`sp-tab-pill${activeId === tab.id ? " active" : ""
-                      }`}
+                    className={`sp-tab-pill${
+                      activeId === tab.id ? " active" : ""
+                    }`}
                     aria-selected={activeId === tab.id}
                     aria-controls={`sp-tab-${tab.id}`}
                     onClick={() => handleTabClick(tab.id)}
@@ -199,10 +202,10 @@ const SpecialistPage = ({ data }) => {
                   <select
                     id="specialty-mobile-select"
                     value={activeId}
-                    onChange={(e) => handleTabClick(e.target.value)}
+                    onChange={e => handleTabClick(e.target.value)}
                     aria-label="Select specialty category"
                   >
-                    {tabs.map((tab) => (
+                    {tabs.map(tab => (
                       <option key={tab.id} value={tab.id}>
                         {tab.label}
                       </option>
@@ -222,17 +225,17 @@ const SpecialistPage = ({ data }) => {
               >
                 {activeTabData?.cards?.map((card, idx) => {
                   const isActive =
-                    activeCard?.tabId === activeId && activeCard?.idx === idx;
+                    activeCard?.tabId === activeId && activeCard?.idx === idx
 
-                  const lastIdx = (activeTabData?.cards?.length || 0) - 1;
+                  const lastIdx = (activeTabData?.cards?.length || 0) - 1
 
                   const rowEnd = activeCard
                     ? Math.ceil((activeCard.idx + 1) / cols) * cols - 1
-                    : null;
+                    : null
 
                   const injectAfter = activeCard
                     ? Math.min(rowEnd, lastIdx)
-                    : null;
+                    : null
 
                   return (
                     <React.Fragment key={card.categoryTitle || idx}>
@@ -257,7 +260,7 @@ const SpecialistPage = ({ data }) => {
                           />
                         )}
                     </React.Fragment>
-                  );
+                  )
                 })}
               </div>
             </div>
@@ -265,10 +268,10 @@ const SpecialistPage = ({ data }) => {
         </section>
       </>
     </Layout>
-  );
-};
+  )
+}
 
-export default SpecialistPage;
+export default SpecialistPage
 
 export const query = graphql`
   query SpecialistPageQuery {
@@ -294,14 +297,6 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export const Head = () => (
-  <>
-    <title>Specialties | Dr. Pavan Pai</title>
-    <meta
-      name="description"
-      content="Explore Dr. Pavan Pai's neurology specialties including General Neurology, Stroke, Movement Disorders, and Neuroimmunology."
-    />
-  </>
-);
+export const Head = () => <SeoMeta {...pageSeo.specialties} />

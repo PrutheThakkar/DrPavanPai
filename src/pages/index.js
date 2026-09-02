@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { Link, graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Layout from "../components/Layout-new";
+import React, { useEffect } from "react"
+import { Link, graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import Layout from "../components/Layout-new"
 import { initHomeAnimation } from "../js/home-animation"
+import SeoMeta from "../components/SeoMeta"
+import { pageSeo } from "../data/seo"
 
 const IndexPage = ({ data }) => {
-
-  const pageData = data?.allWpPage?.edges?.[0]?.node?.homePage;
+  const pageData = data?.allWpPage?.edges?.[0]?.node?.homePage
 
   const {
     homePageTitle,
@@ -20,34 +21,34 @@ const IndexPage = ({ data }) => {
     patientsChooseTitle,
     patientsChoosePara,
     patientsChooseList,
-  } = pageData || {};
+  } = pageData || {}
 
-  const brainImgUrl = brainImage?.node?.mediaItemUrl;
-  const brainImgAlt = brainImage?.node?.altText || "Brain image";
+  const brainImgUrl = brainImage?.node?.mediaItemUrl
+  const brainImgAlt = brainImage?.node?.altText || "Brain image"
 
-  const doctorImgUrl = aboutDoctorImage?.node?.mediaItemUrl;
-  const doctorImgAlt = aboutDoctorImage?.node?.altText || "Dr Pavan Pai";
+  const doctorImgUrl = aboutDoctorImage?.node?.mediaItemUrl
+  const doctorImgAlt = aboutDoctorImage?.node?.altText || "Dr Pavan Pai"
 
   useEffect(() => {
-  if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return
 
-  const startAnimation = () => {
-    initHomeAnimation();
-  };
+    const startAnimation = () => {
+      initHomeAnimation()
+    }
 
-  if (document.readyState === "complete") {
-    startAnimation();
-  } else {
-    window.addEventListener("load", startAnimation);
-  }
+    if (document.readyState === "complete") {
+      startAnimation()
+    } else {
+      window.addEventListener("load", startAnimation)
+    }
 
-  return () => {
-    window.removeEventListener("load", startAnimation);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("load", startAnimation)
+    }
+  }, [])
 
   return (
-   <Layout showPreloader={true}>
+    <Layout showPreloader={true}>
       <>
         {/* ── Hero Section ── */}
         <section className="hero-section">
@@ -56,7 +57,9 @@ const IndexPage = ({ data }) => {
               <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
               <span dangerouslySetInnerHTML={{ __html: homeHeroPara }} />
               <div className="btn-wrap">
-                <Link to="/contact" className="btn">Book an Appointment</Link>
+                <Link to="/contact" className="btn">
+                  Request A Consultation
+                </Link>
               </div>
             </div>
 
@@ -69,8 +72,6 @@ const IndexPage = ({ data }) => {
                       src={brainImgUrl}
                       alt={brainImgAlt}
                     />
-
-                   
                   </>
                 )}
               </div>
@@ -83,13 +84,10 @@ const IndexPage = ({ data }) => {
           <div className="container">
             <div className="left">
               <div className="img">
-                {doctorImgUrl && (
-                  <img src={doctorImgUrl} alt={doctorImgAlt} />
-                )}
+                {doctorImgUrl && <img src={doctorImgUrl} alt={doctorImgAlt} />}
               </div>
             </div>
             <div className="right">
-
               <span
                 className="about-para"
                 dangerouslySetInnerHTML={{ __html: aboutTitle }}
@@ -99,7 +97,9 @@ const IndexPage = ({ data }) => {
                 dangerouslySetInnerHTML={{ __html: aboutPara }}
               />
               <div className="btn-wrap">
-                <Link to="/about" className="btn">Know More</Link>
+                <Link to="/about" className="btn">
+                  Know More
+                </Link>
               </div>
             </div>
           </div>
@@ -134,7 +134,9 @@ const IndexPage = ({ data }) => {
                   ))}
                 </ul>
                 <div className="btn-wrap">
-                  <Link to="/specialties" className="btn">Read More</Link>
+                  <Link to="/specialties" className="btn">
+                    Read More
+                  </Link>
                 </div>
               </div>
               <div className="right"></div>
@@ -161,7 +163,10 @@ const IndexPage = ({ data }) => {
                       <div className="img-wrap">
                         <img
                           src={item?.patientsImage?.node?.mediaItemUrl}
-                          alt={item?.patientsImage?.node?.altText || item?.patientsList}
+                          alt={
+                            item?.patientsImage?.node?.altText ||
+                            item?.patientsList
+                          }
                         />
                       </div>
                       <span
@@ -172,80 +177,92 @@ const IndexPage = ({ data }) => {
                   ))}
                 </ul>
                 <div className="btn-wrap">
-                  <Link to="/specialties" className="btn">Read More</Link>
+                  <Link to="/specialties" className="btn">
+                    Read More
+                  </Link>
                 </div>
               </div>
               <div className="right"></div>
             </div>
           </div>
         </section>
-        
       </>
     </Layout>
-  );
-};
+  )
+}
 
 export const query = graphql`
-query MyQuery {
-  allWpPage (filter: {databaseId: {eq: 8}}){
-    edges {
-      node {
-        homePage {
-          homeHeroPara
-          homePageTitle
-          brainImage {
-            node {
-              altText
-              link
-              mediaItemUrl
-              gatsbyImage(width: 10, height: 10, placeholder: BLURRED, layout: CONSTRAINED)
-            }
-          }
-          aboutTitle
-          aboutPara
-          aboutDoctorImage {
-            node {
-              altText
-              link
-              mediaItemUrl
-              gatsbyImage(width: 10, height: 10, placeholder: BLURRED, layout: CONSTRAINED)
-            }
-          }
-          subTitle
-          clinicalFocusList {
-            nameList
-            listImage {
+  query MyQuery {
+    allWpPage(filter: { databaseId: { eq: 8 } }) {
+      edges {
+        node {
+          homePage {
+            homeHeroPara
+            homePageTitle
+            brainImage {
               node {
                 altText
+                link
                 mediaItemUrl
-                mediaItemId
-                slug
-                uri
-                title
+                gatsbyImage(
+                  width: 10
+                  height: 10
+                  placeholder: BLURRED
+                  layout: CONSTRAINED
+                )
               }
             }
-          }
-          patientsChooseTitle
-          patientsChoosePara
-          patientsChooseList{
-            patientsList
-            patientsImage{
-               node {
+            aboutTitle
+            aboutPara
+            aboutDoctorImage {
+              node {
                 altText
+                link
                 mediaItemUrl
-                mediaItemId
-                slug
-                uri
-                title
+                gatsbyImage(
+                  width: 10
+                  height: 10
+                  placeholder: BLURRED
+                  layout: CONSTRAINED
+                )
               }
             }
-            
+            subTitle
+            clinicalFocusList {
+              nameList
+              listImage {
+                node {
+                  altText
+                  mediaItemUrl
+                  mediaItemId
+                  slug
+                  uri
+                  title
+                }
+              }
+            }
+            patientsChooseTitle
+            patientsChoosePara
+            patientsChooseList {
+              patientsList
+              patientsImage {
+                node {
+                  altText
+                  mediaItemUrl
+                  mediaItemId
+                  slug
+                  uri
+                  title
+                }
+              }
+            }
           }
         }
       }
     }
   }
-}
 `
 
-export default IndexPage;
+export default IndexPage
+
+export const Head = () => <SeoMeta {...pageSeo.home} />
