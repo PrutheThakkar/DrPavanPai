@@ -3,9 +3,59 @@
 import React, { useState, useCallback, useEffect, useRef } from "react"
 import { graphql } from "gatsby"
 import InsideBanner from "../components/Inside-Banner"
+import pageBanner from "../images/expertise_page_banner.webp"
 import Layout from "../components/Layout-new"
 import SeoMeta from "../components/SeoMeta"
 import { pageSeo } from "../data/seo"
+import vertigoImage from "../images/vertigo-new-img.webp"
+import epilepsyImage from "../images/epilepsy-new-img.webp"
+import dementiaImage from "../images/dementia-new-img.webp"
+import neuropathyImage from "../images/neuropathy-new-img.webp"
+import headacheImage from "../images/headache-new-img.webp"
+import neuroinfectionImage from "../images/neuroinfection-new-img.webp"
+import sleepDisordersImage from "../images/sleep-diseases-new-img.webp"
+import neuromuscularDisordersImage from "../images/neuromuscular-disorders-new-img.webp"
+import neurorehabilitationImage from "../images/neurorehasitation-new-img.webp"
+import parkinsonImage from "../images/parkinson-new-img.webp"
+import tremorImage from "../images/tremor-new-img.webp"
+import dystoniaImage from "../images/dystonia-new-img.webp"
+import otherMovementImage from "../images/other-movement-new-img.webp"
+import autoimmuneNeurologyImage from "../images/Autoimmune-Neurology-new-img.webp"
+import neuroimmunologicalDisordersImage from "../images/Neuroimmunological-Disorders-new-img.webp"
+import inflammatoryConditionsImage from "../images/Related Inflammatory-Conditions-new-img.webp"
+import acuteStrokeImage from "../images/acute-stroke.webp"
+import carotidVertebralArteryImage from "../images/Carotid-Vertebral-Artery-new-img.webp"
+import cerebralSpinalDsaImage from "../images/Cerebral-Spinal-DSA-new-img.webp"
+import mechanicalThrombectomyImage from "../images/Mechanical-Thrombectomy-new-img.webp"
+import aneurysmCoilingImage from "../images/Aneurysm-Coiling-new-img.webp"
+import flowDiverterStentingImage from "../images/Flow-Diverter-Stenting-new-img.webp"
+import avmEmbolisationImage from "../images/AVM-Embolisation-new-img.webp"
+
+const specialtyImages = {
+  Vertigo: vertigoImage,
+  Epilepsy: epilepsyImage,
+  Dementia: dementiaImage,
+  Neuropathy: neuropathyImage,
+  Headache: headacheImage,
+  Neuroinfection: neuroinfectionImage,
+  "Sleep Disorders": sleepDisordersImage,
+  "Neuromuscular Disorders": neuromuscularDisordersImage,
+  Neurorehabilitation: neurorehabilitationImage,
+  "Parkinson’s Disease": parkinsonImage,
+  Tremor: tremorImage,
+  Dystonia: dystoniaImage,
+  "Other Movement Disorders": otherMovementImage,
+  "Autoimmune Neurology": autoimmuneNeurologyImage,
+  "Neuroimmunological Disorders": neuroimmunologicalDisordersImage,
+  "Related Inflammatory Conditions": inflammatoryConditionsImage,
+  "Acute Stroke": acuteStrokeImage,
+  "Carotid & Vertebral Artery Disease": carotidVertebralArteryImage,
+  "Cerebral & Spinal DSA": cerebralSpinalDsaImage,
+  "Mechanical Thrombectomy": mechanicalThrombectomyImage,
+  "Aneurysm Coiling": aneurysmCoilingImage,
+  "Flow Diverter Stenting": flowDiverterStentingImage,
+  "AVM Embolisation": avmEmbolisationImage,
+}
 
 const DESKTOP_COLS = 3
 const MOBILE_COLS = 2
@@ -124,7 +174,22 @@ const SpecialistPage = ({ data }) => {
     data?.allWpSpecialty?.edges?.map(({ node }) => ({
       id: getSafeId(node.title),
       label: node.title,
-      cards: node.specialties?.categoryContent || [],
+      cards: (node.specialties?.categoryContent || []).map(card => {
+        const localImage = specialtyImages[card.categoryTitle]
+
+        return localImage
+          ? {
+              ...card,
+              categoryImage: {
+                ...card.categoryImage,
+                node: {
+                  ...card.categoryImage?.node,
+                  mediaItemUrl: localImage,
+                },
+              },
+            }
+          : card
+      }),
     })) || []
 
   const activeId = activeTab || tabs[0]?.id || ""
@@ -149,8 +214,8 @@ const SpecialistPage = ({ data }) => {
     <Layout>
       <>
         <InsideBanner
-          desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/inside-header-img.webp"
-          mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/inside-header-img.webp"
+          desktopImage={pageBanner}
+          mobileImage={pageBanner}
           alt="Specialties page banner"
           width={1440}
           height={500}

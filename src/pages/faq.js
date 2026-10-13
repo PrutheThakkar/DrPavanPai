@@ -3,6 +3,7 @@
 import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import InsideBanner from "../components/Inside-Banner"
+import pageBanner from "../images/faq_page_banner.webp"
 import Layout from "../components/Layout-new"
 import SeoMeta from "../components/SeoMeta"
 import { pageSeo, siteUrl } from "../data/seo"
@@ -38,8 +39,8 @@ const FaqPage = ({ data }) => {
       <>
         {/* ── Inside Banner ── */}
         <InsideBanner
-          desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
-          mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog-new.webp"
+          desktopImage={pageBanner}
+          mobileImage={pageBanner}
           alt="FAQ page banner"
           width={1440}
           height={500}

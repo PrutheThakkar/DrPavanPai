@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout-new"
 import InsideBanner from "../components/Inside-Banner"
+import pageBanner from "../images/contact_page_banner.webp"
 import AppointmentForm from "../components/AppointmentForm"
 import SeoMeta from "../components/SeoMeta"
 import { pageSeo } from "../data/seo"
@@ -19,9 +20,9 @@ const ExpertisePage = ({ data }) => {
   return (
     <Layout>
       <InsideBanner
-        desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/contact_page_banner_new.webp"
-        mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/contact_page_banner_new.webp"
-        alt="FAQ page banner"
+        desktopImage={pageBanner}
+        mobileImage={pageBanner}
+        alt="Contact page banner"
         width={1440}
         height={500}
       />

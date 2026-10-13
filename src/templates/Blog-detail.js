@@ -5,6 +5,7 @@ import Layout from "../components/Layout-new"
 import "../css/blog.css"
 import SeoMeta from "../components/SeoMeta"
 import { getBlogSeo } from "../data/seo"
+import { getBlogImage } from "../data/blogImages"
 
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
@@ -100,9 +101,10 @@ const BlogDetail = ({ data }) => {
   const selectedBanner = exactSlugBanner || orderBanner
 
   const desktopBanner =
-    selectedBanner?.desktop || img?.mediaItemUrl || fallbackBanner
+    getBlogImage(post) || selectedBanner?.desktop || fallbackBanner
 
   const mobileBanner =
+    getBlogImage(post) ||
     selectedBanner?.mobile ||
     selectedBanner?.desktop ||
     img?.mediaItemUrl ||
@@ -147,7 +149,7 @@ export const Head = ({ data }) => {
     title: post.title,
     slug: post.slug,
     description: post.content,
-    image: post.featuredImage?.node?.mediaItemUrl,
+    image: getBlogImage(post),
   })
   const schema = {
     "@context": "https://schema.org",

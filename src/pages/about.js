@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout-new"
 import InsideBanner from "../components/Inside-Banner"
+import pageBanner from "../images/about_page_banner.webp"
 import aboutDrBg from "../images/about-page-dr-img.png"
 import SeoMeta from "../components/SeoMeta"
 import { pageSeo } from "../data/seo"
@@ -26,8 +27,8 @@ const AboutPage = ({ data }) => {
   return (
     <Layout>
       <InsideBanner
-        desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/about_page_banner.webp"
-        mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/about_page_banner.webp"
+        desktopImage={pageBanner}
+        mobileImage={pageBanner}
         alt="About page banner"
         width={1440}
         height={500}

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react"
 import { graphql, Link } from "gatsby"
 import InsideBanner from "../components/Inside-Banner"
+import pageBanner from "../images/blogs_page_banner.webp"
 import Layout from "../components/Layout-new"
 import "../css/blog.css"
 import SeoMeta from "../components/SeoMeta"
 import { pageSeo } from "../data/seo"
+import { getBlogImage } from "../data/blogImages"
 
 export const query = graphql`
   query MyQuery {
@@ -36,8 +38,8 @@ const BlogListing = ({ data }) => {
     <Layout>
       {/* ── Inside Banner ── */}
       <InsideBanner
-        desktopImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_banner-new.webp"
-        mobileImage="https://app.drpavanpai.com/wp-content/uploads/2026/06/blog_banner-new.webp"
+        desktopImage={pageBanner}
+        mobileImage={pageBanner}
         alt="Blog page banner"
         width={1440}
         height={500}
@@ -57,14 +59,15 @@ const BlogListing = ({ data }) => {
           <div className="blog-grid">
             {posts.map(post => {
               const img = post.featuredImage?.node
+              const imageUrl = getBlogImage(post)
 
               return (
                 <div key={post.slug} className="blog-card">
                   <div className="blog-card__image-wrap">
-                    {img ? (
+                    {imageUrl ? (
                       <img
-                        src={img.mediaItemUrl}
-                        alt={img.altText || post.title}
+                        src={imageUrl}
+                        alt={img?.altText || post.title}
                         className="blog-card__image"
                       />
                     ) : (
