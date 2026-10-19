@@ -68,64 +68,23 @@ const AboutPage = ({ data }) => {
           <div className="about-content-wrap">
             <div className="about-text">
               <p>
-                Neurological conditions often present with uncertainty. Symptoms
-                may be subtle, progress gradually over time, or require urgent
-                medical attention. Effective neurological care begins with
-                understanding these symptoms in the right context, arriving at
-                an accurate diagnosis, and developing a treatment plan that is
-                tailored to the individual rather than the condition alone.
+                Neurological conditions can affect movement, memory, speech, sensation and everyday activities. Some develop gradually, while others, such as stroke, require urgent medical assessment. Understanding the symptoms, medical history and clinical findings helps guide the next steps in evaluation and treatment.
               </p>
 
               <p>
-                Dr. Pavan Pai is an Interventional Neurologist at Wockhardt
-                Hospitals, Mira Road, where he has been practicing since 2020.
-                His expertise spans both comprehensive clinical neurology and
-                advanced neurovascular interventions, allowing patients to
-                access medical, procedural, and long-term neurological care
-                under one roof. This integrated approach ensures continuity
-                across diagnosis, treatment, recovery, and follow-up,
-                particularly for patients with complex neurological and
-                neurovascular conditions.
+               Dr. Pavan Pai is an Interventional Neurologist at Wockhardt Hospitals, Mira Road, where he has been practising since 2020. His clinical practice includes the evaluation and management of neurological conditions, along with neurointerventional procedures for selected disorders affecting the brain and its blood vessels. Care may involve medication, minimally invasive procedures or a combination of approaches, depending on the condition and the patient's clinical needs.
               </p>
 
               <p>
-                After completing his specialised training in Neurology, Dr. Pai
-                pursued a two-year post-doctoral Fellowship in
-                Neurointerventions. He is trained in advanced minimally invasive
-                procedures used in the treatment of stroke and neurovascular
-                disorders, including mechanical thrombectomy for acute ischemic
-                stroke, carotid artery stenting, aneurysm coiling, AVM
-                embolisation, flow diversion, and cerebral angiography. These
-                procedures play a critical role in restoring blood flow,
-                preventing neurological damage, and improving outcomes in
-                time-sensitive neurological emergencies.
+               Following his training in Neurology, Dr. Pai completed a two-year post-doctoral fellowship in Neurointerventions. His procedural training includes mechanical thrombectomy for acute ischaemic stroke, carotid artery stenting, aneurysm coiling, arteriovenous malformation (AVM) embolisation, flow diversion and cerebral angiography. These procedures may be considered for specific neurovascular conditions following clinical assessment. The choice of treatment depends on factors such as the diagnosis, severity of the condition, timing and individual medical circumstances.
               </p>
               <p>
-                Alongside his interventional practice, Dr. Pai conducts a
-                dedicated General Neurology clinic, managing a broad spectrum of
-                neurological conditions including stroke, epilepsy, headaches,
-                vertigo, movement disorders, dementia, neuromuscular disorders,
-                peripheral neuropathies, neuroimmunological disorders, sleep
-                disorders, and neurorehabilitation needs. His clinical
-                philosophy is rooted in careful evaluation, evidence-based
-                treatment, and clear communication, helping patients and
-                families understand their diagnosis and treatment options with
-                confidence. A key area of interest is acute stroke management.
-                Given the time-critical nature of stroke treatment, Dr. Pai
-                remains actively involved in emergency stroke care, ensuring
-                rapid assessment and access to advanced interventions whenever
-                required. His commitment to timely decision-making and
-                precision-driven care reflects a simple belief: neurological
-                treatment should be accurate, evidence-based, and easy for
-                patients to navigate.
+                Alongside neurointerventional care, Dr. Pai evaluates and manages a range of neurological conditions, including stroke, epilepsy, headaches, vertigo, movement disorders, dementia, neuromuscular conditions, peripheral neuropathies and neuroimmunological disorders. Consultations involve reviewing symptoms and medical history, considering investigations where indicated, and discussing suitable treatment options. Patients and their families can also discuss follow-up care, rehabilitation needs and coordination with other specialties where appropriate.
               </p>
               <p>
-                Outside of medicine, Dr. Pai is an avid marathon runner. The
-                discipline, consistency, and preparation that endurance sports
-                demand mirror many of the principles that underpin neurological
-                care, where meaningful progress is often built through patience,
-                persistence, and attention to detail.
+                Acute stroke management is an important part of Dr. Pai's clinical practice. Stroke symptoms require urgent medical attention, as timely assessment helps determine which treatments may be appropriate. Treatment decisions depend on the type of stroke, the time since symptoms began, investigation findings and the patient's overall condition.
               </p>
+              <p>Outside his clinical practice, Dr. Pai is an avid marathon runner. Distance running involves preparation, consistency and patience, qualities that also form part of his personal approach to everyday life.</p>
             </div>
           </div>
         </div>

@@ -144,7 +144,7 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
 
-        <section className="patient-choose">
+        {/* <section className="patient-choose">
           <div className="Patients-Choose">
             <div className="container">
               <div className="left">
@@ -185,7 +185,7 @@ const IndexPage = ({ data }) => {
               <div className="right"></div>
             </div>
           </div>
-        </section>
+        </section> */}
       </>
     </Layout>
   )
